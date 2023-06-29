@@ -221,6 +221,11 @@ public class appointment extends javax.swing.JFrame {
         jLabel1.setText("     SN");
 
         txtsearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsearchActionPerformed(evt);
+            }
+        });
 
         btnsearch.setBackground(new java.awt.Color(80, 131, 233));
         btnsearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -300,6 +305,16 @@ public class appointment extends javax.swing.JFrame {
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
+         String IID = txtsearch.getText();
+         try {
+        Connection dbconn = (Connection) DbConnection.connectDB();
+        Statement st = (Statement) dbconn.createStatement();
+        st.executeUpdate("DELETE FROM appointment1 WHERE SN ="+IID+"");
+        JOptionPane.showMessageDialog(this, "Appointment delete successfully!");
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(rootPane, e);
+    }
+
 DefaultTableModel tblModel = (DefaultTableModel) tableappointment.getModel();
 if (tableappointment.getSelectedRowCount() == 1) {
     tblModel.removeRow(tableappointment.getSelectedRow());
@@ -310,6 +325,7 @@ if (tableappointment.getSelectedRowCount() == 1) {
         JOptionPane.showMessageDialog(this, "Please select a single row");
     }
 }
+
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
@@ -406,6 +422,10 @@ model. setValueAt (NewpatientName, selectedRowIndex,5);
 
 
     }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void txtsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsearchActionPerformed
 
     /**
      * @param args the command line arguments
