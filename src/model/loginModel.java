@@ -3,13 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
 /**
  *
  * @author kiYo
  */
 public class loginModel {
-    String username, password;
+    private String username, password;
 
     public loginModel(String username, String password) {
         this.username = username;
@@ -30,5 +29,21 @@ public class loginModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public static boolean usernamevalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean passwordvalidation(String var){
+        if(var.equals("")){
+            return false;
+        } else{
+            return true;
+        }
     }
 }
