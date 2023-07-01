@@ -33,6 +33,8 @@ public class SignUpController {
             smodel.getpass(),
             smodel.getconnpass()
             );
+            view.insertData();
+            
         }
     }
 }
