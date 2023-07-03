@@ -6,6 +6,12 @@
 package view;
 
 import database.DbConnection;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -224,10 +230,10 @@ public class View_Report extends javax.swing.JFrame {
 
         txt_contact.setEditable(false);
 
-        lbl_test.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lbl_test.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         lbl_test.setText("Test:");
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("Result:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -240,9 +246,7 @@ public class View_Report extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8))
+                                .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_weight, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
@@ -252,8 +256,9 @@ public class View_Report extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(42, 42, 42)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(27, 27, 27)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_age, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,11 +268,8 @@ public class View_Report extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(lbl_test, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lbl_test, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_test, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,6 +398,11 @@ public class View_Report extends javax.swing.JFrame {
         btn_print.setIcon(new javax.swing.ImageIcon("/Users/sashwat/Downloads/PawFect-1/src/Foto/PRINTr.jpg")); // NOI18N
         btn_print.setBorderPainted(false);
         btn_print.setContentAreaFilled(false);
+        btn_print.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_printMouseClicked(evt);
+            }
+        });
         btn_print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_printActionPerformed(evt);
@@ -526,7 +533,9 @@ this.dispose();
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
-        // TODO add your handling code here:
+    Print print=new Print();
+    print.show();
+this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btn_printActionPerformed
 
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
@@ -640,6 +649,9 @@ this.dispose();
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btn_printMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_printMouseClicked
+    }//GEN-LAST:event_btn_printMouseClicked
 
     /**
      * @param args the command line arguments
