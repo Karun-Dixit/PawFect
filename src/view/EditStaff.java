@@ -4,11 +4,13 @@
  */
 package view;
 
+import controller.StaffController;
 import database.DbConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.Statement;
+import model.StaffModel;
 
 /**
  *
@@ -191,21 +193,23 @@ public class EditStaff extends javax.swing.JFrame {
 
     private void bthUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthUpdateActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        String name = txtName.getText();
-        String field= txtField.getText();
-        String ph=txtContact.getText();
-        String exp = txtCategory.getText();
-        String shift= txtShift.getText();
-        try{
-             Connection dbconn = (Connection) DbConnection.connectDB();
-             Statement st=(Statement)dbconn.createStatement();
-             st.executeUpdate("update staffs set Name='"+name+"',Field='"+field+"',Contact='"+ph+"',Category='"+exp+"',Shift='"+shift+"'where ID='"+dId+"'");
-             JOptionPane.showMessageDialog(null, "Successfully Updated!");
-             setVisible(false);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+        StaffController scontrol = new StaffController(getuser(),this);
+        scontrol.addStaff();
+//        String dId=jTextField6.getText();
+//        String name = txtName.getText();
+//        String field= txtField.getText();
+//        String ph=txtContact.getText();
+//        String exp = txtCategory.getText();
+//        String shift= txtShift.getText();
+//        try{
+//             Connection dbconn = (Connection) DbConnection.connectDB();
+//             Statement st=(Statement)dbconn.createStatement();
+//             st.executeUpdate("update staffs set Name='"+name+"',Field='"+field+"',Contact='"+ph+"',Category='"+exp+"',Shift='"+shift+"'where ID='"+dId+"'");
+//             JOptionPane.showMessageDialog(null, "Successfully Updated!");
+//             setVisible(false);
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
     }//GEN-LAST:event_bthUpdateActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -306,4 +310,14 @@ public class EditStaff extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtShift;
     // End of variables declaration//GEN-END:variables
+    public StaffModel getuser(){
+    StaffModel stafff = new StaffModel(
+    txtname.getText(),
+     txtfield.getText(),
+      txtcontact.getText(),
+        txtcategory.getText(),
+        txtshift.getText()
+    );
+    return stafff;
+}
 }

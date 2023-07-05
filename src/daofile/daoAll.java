@@ -8,6 +8,8 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+//import javax.swing.JOptionPane;
+//import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author kiYo
@@ -69,5 +71,39 @@ public class daoAll extends DbConnection{
             return false;
         }
     }
+    
+    public static boolean updateStaff(String name, String field, String ph, String exp, String shift) {
+        try(Connection dbconn = (Connection) DbConnection.connectDB()){
+            PreparedStatement st = (PreparedStatement)
+            dbconn.prepareStatement("Insert into staffs(Name,Field,Contact,Category,Shift) values(?,?,?,?,?)");
+            st.setString(1,name);
+            st.setString(2,field);
+            st.setString(3,ph);
+            st.setString(4,exp);
+            st.setString(5,shift);
+            int res = st.executeUpdate();
+            st.close();
+            dbconn.close();
+            return res>0;
+        }catch(SQLException ex){
+            return false;
+        }
+    }
+    
+//    public void tableDetails(String var){
+//        DefaultTableModel dtm = (DefaultTableModel) var.getModel(staffTable);
+//        dtm.setRowCount(0);
+//      Statement st=null;
+//      ResultSet rs=null;
+//    try{
+//        Connection dbconn = (Connection) DbConnection.connectDB();
+//        st=(Statement)dbconn.createStatement();
+//        rs = st.executeQuery("select * from staffs");
+//        while(rs.next()){
+//            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
+//        }
+//    }catch(SQLException e){
+//    }
+//    }
 }
 

@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-
-import database.DbConnection;
 import view.Login;
 import model.loginModel;
 import daofile.daoAll;
-import javax.swing.JOptionPane;
+
 
 public class LoginController {
 
