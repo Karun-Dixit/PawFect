@@ -7,7 +7,7 @@ package controller;
 import database.DbConnection;
 import view.Login;
 import model.loginModel;
-import daofile.daoLogin;
+import daofile.daoAll;
 import javax.swing.JOptionPane;
 
 public class LoginController {
@@ -22,7 +22,7 @@ public class LoginController {
     
     public void verifyuser(){
         if(view.isvalid()){
-            if(daoLogin.verifyLogin(lmodel.getUsername(),lmodel.getPassword())){
+            if(daoAll.verifyLogin(lmodel.getUsername(),lmodel.getPassword())){
             } else{
             }
    }

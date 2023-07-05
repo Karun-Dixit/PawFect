@@ -11,57 +11,60 @@ package model;
 public class StaffModel {
     private String name;
     private String field;
-    private String ph;
-    private String exp;
+    private String contact;
+    private String category;
     private String shift;
 
-    public StaffModel(String name, String field, String ph, String exp, String shift) {
+    public StaffModel(String name, String field, String contact, String category, String shift) {
         this.name = name;
         this.field = field;
-        this.ph = ph;
-        this.exp = exp;
+        this.contact = contact;
+        this.category = category;
         this.shift = shift;
     }
-    
-     public String getName() {
+
+
+    public String getname() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setname(String name) {
         this.name = name;
     }
 
-    public String getField() {
+    public String getfield() {
         return field;
     }
 
-    public void setField(String field) {
+    public void setfield(String field) {
         this.field = field;
     }
 
-    public String getPh() {
-        return ph;
+    public String getcontact() {
+        return contact;
     }
 
-    public void setPh(String ph) {
-        this.ph = ph;
+    public void setcontact(String contact) {
+        this.contact = contact;
     }
 
-    public String getExp() {
-        return exp;
+    public String getcategory() {
+        return category;
     }
 
-    public void setExp(String exp) {
-        this.exp = exp;
+    public void setcategory(String category) {
+        this.category = category;
     }
 
-    public String getShift() {
+    public String getshift() {
         return shift;
     }
 
-    public void setShift(String shift) {
+    public void setshift(String shift) {
         this.shift = shift;
     }
+    
+    
     
     public static boolean namevalidation(String var){
         if (var.equals("")){
@@ -79,7 +82,7 @@ public class StaffModel {
         }
     }
     
-    public static boolean phvalidation(String var){
+    public static boolean contactvalidation(String var){
         if (var.equals("")){
             return false;
         } else {
@@ -87,7 +90,7 @@ public class StaffModel {
         }
     }
     
-    public static boolean expvalidation(String var){
+    public static boolean categoryvalidation(String var){
         if (var.equals("")){
             return false;
         } else {

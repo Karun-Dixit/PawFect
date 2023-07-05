@@ -12,7 +12,7 @@ import java.sql.ResultSet;
  *
  * @author kiYo
  */
-public class daoLogin extends DbConnection{
+public class daoAll extends DbConnection{
     
     public static boolean verifyLogin(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE uname = ? AND pass = ?";
@@ -48,7 +48,24 @@ public class daoLogin extends DbConnection{
             dbconn.close();
             return res>0;
         }catch(SQLException ex){
-            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static boolean saveToStaff(String name, String field, String ph, String exp, String shift) {
+        try(Connection dbconn = (Connection) DbConnection.connectDB()){
+            PreparedStatement st = (PreparedStatement)
+            dbconn.prepareStatement("Insert into staffs(Name,Field,Contact,Category,Shift) values(?,?,?,?,?)");
+            st.setString(1,name);
+            st.setString(2,field);
+            st.setString(3,ph);
+            st.setString(4,exp);
+            st.setString(5,shift);
+            int res = st.executeUpdate();
+            st.close();
+            dbconn.close();
+            return res>0;
+        }catch(SQLException ex){
             return false;
         }
     }
