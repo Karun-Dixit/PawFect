@@ -28,16 +28,9 @@ public class EditStaffController {
         daoAll o=new daoAll(smodel);
         return o.updateStaff();
     }
-    public void delStaff(){
-            daoAll.deleteStaff(
-            smodel.getdID(),
-            smodel.getname(),
-            smodel.getfield(),
-            smodel.getcontact(),
-            smodel.getcategory(),
-            smodel.getshift()
-            );
-            view.deleteData();
+    public boolean delStaff(){
+            daoAll dd=new daoAll(smodel);
+            return dd.deleteStaff();
     }
     public boolean searchStaff(){
         daoAll o=new daoAll(smodel);

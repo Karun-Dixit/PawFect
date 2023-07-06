@@ -73,13 +73,5 @@ public class EditStaffModel {
         EditStaffModel.shift = shift;
     }
     
-//        public boolean searchData(String name,String field, String contact, String category, String shift){
-//        txtname.setText(name);
-//        txtfield.setText(field);
-//        txtcontact.setText(contact);
-//        txtcategory.setText(category);
-//        txtshift.setText(shift);
-//        return false; 
-//    }
     
 }

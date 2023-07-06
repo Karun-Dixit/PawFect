@@ -5,11 +5,10 @@
         <group>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/daofile/daoAll.java</file>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/view/EditStaff.java</file>
+            <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/view/DashBoard.java</file>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/controller/EditStaffController.java</file>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/model/EditStaffModel.java</file>
-            <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/model/StaffModel.java</file>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/view/Staff.java</file>
-            <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/controller/StaffController.java</file>
             <file>file:/C:/Users/kiYo/Documents/NetBeansProjects/PawFect/src/view/AddStaff.java</file>
         </group>
     </open-files>

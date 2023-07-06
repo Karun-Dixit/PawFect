@@ -112,12 +112,13 @@ public class daoAll extends DbConnection{
         }
     }
     
-    public static boolean deleteStaff(String dID, String name, String field, String ph, String exp, String shift) {
+    public boolean deleteStaff() {
         try{
                 Connection dbconn = (Connection) DbConnection.connectDB();
                 Statement st=(Statement)dbconn.createStatement();
-                st.executeUpdate("delete from staffs where ID='"+dID+"'");
+                st.executeUpdate("delete from staffs where ID='"+getdID()+"'");
                 JOptionPane.showMessageDialog(null,"Successfully Deleted!");
+                return true;
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
             }

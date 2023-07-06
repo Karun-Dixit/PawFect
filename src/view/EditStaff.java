@@ -45,7 +45,7 @@ public class EditStaff extends javax.swing.JFrame {
         txtcontact = new javax.swing.JTextField();
         txtcategory = new javax.swing.JTextField();
         txtshift = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
@@ -90,12 +90,12 @@ public class EditStaff extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jLabel6.setText("Shift:");
 
-        jButton3.setBackground(new java.awt.Color(80, 131, 233));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jButton3.setText("DELETE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(80, 131, 233));
+        btnDelete.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -140,7 +140,7 @@ public class EditStaff extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(bthUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnDelete)
                 .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,7 +176,7 @@ public class EditStaff extends javax.swing.JFrame {
                                 .addComponent(txtshift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(bthUpdate)
-                                .addComponent(jButton3))))
+                                .addComponent(btnDelete))))
                     .addComponent(txtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -208,14 +208,21 @@ public class EditStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bthUpdateActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int s=JOptionPane.showConfirmDialog(null,"Are sure to delete?","Select",JOptionPane.YES_NO_OPTION);
         if(s==0){
             EditStaffController econtrol = new EditStaffController(getuser(),this);
-            econtrol.delStaff();
+            if(econtrol.delStaff()){
+                jTextField6.setText("");
+                txtname.setText("");
+                txtfield.setText("");
+                txtcontact.setText("");
+                txtcategory.setText("");
+                txtshift.setText("");
+            }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -234,10 +241,20 @@ public class EditStaff extends javax.swing.JFrame {
             txtcategory.setText(getcategory());
             txtshift.setText(getshift());
         }
-        
-        
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    
+    public EditStaffModel getuser(){
+    EditStaffModel stafff = new EditStaffModel(
+       jTextField6.getText(),     
+      txtname.getText(),
+     txtfield.getText(),
+    txtcontact.getText(),
+   txtcategory.getText(),
+     txtshift.getText()
+    );
+    return stafff;
+    }  
     /**
      * @param args the command line arguments
      */
@@ -275,9 +292,9 @@ public class EditStaff extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bthUpdate;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -292,36 +309,5 @@ public class EditStaff extends javax.swing.JFrame {
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtshift;
     // End of variables declaration//GEN-END:variables
-    
-    public EditStaffModel getuser(){
-    EditStaffModel stafff = new EditStaffModel(
-       jTextField6.getText(),     
-      txtname.getText(),
-     txtfield.getText(),
-    txtcontact.getText(),
-   txtcategory.getText(),
-     txtshift.getText()
-    );
-    return stafff;
-    }
-
-    
-    
-    public boolean updateData(){
-            
-        return false;
-    }
-    
-    public boolean deleteData(){
-            jTextField6.setText("");
-            txtname.setText("");
-            txtfield.setText("");
-            txtcontact.setText("");
-            txtcategory.setText("");
-            txtshift.setText("");
-        return false;
-    }
-    
-    
-                
+              
 }
