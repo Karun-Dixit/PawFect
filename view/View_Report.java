@@ -19,14 +19,16 @@ import java.sql.PreparedStatement;
 import java.util.jar.Attributes.Name;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modell.View_ReportModel;
 
 /**
  *
  * @author sashwat
  */
+
 public class View_Report extends javax.swing.JFrame {
     DefaultTableModel model;
-
+    View_ReportModel modell;
     /**
      * Creates new form View_Report
      */
@@ -34,6 +36,11 @@ public class View_Report extends javax.swing.JFrame {
         initComponents();
         setRecordsTable();
     }
+    
+public View_ReportModel getUser(){
+ modell= new View_ReportModel(txt_search.getText());
+ return modell;
+}
     public void setRecordsTable(){
         try{
             Connection dbconn=DbConnection.connectDB();
@@ -533,9 +540,16 @@ this.dispose();
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
-    Print print=new Print();
+    String sec=txt_search.getText();
+        if (sec.equals("")){
+                     JOptionPane.showMessageDialog(null, "No ID number selected");
+
+    }
+    else{
+        Print print=new Print();
     print.show();
 this.dispose();// TODO add your handling code here:
+    }
     }//GEN-LAST:event_btn_printActionPerformed
 
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
@@ -606,6 +620,7 @@ this.dispose();// TODO add your handling code here:
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
+            
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btn_searchActionPerformed
 

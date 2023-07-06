@@ -13,6 +13,8 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author sashwat
@@ -148,12 +150,11 @@ public class Print extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         PrinterJob job = PrinterJob.getPrinterJob();
-            job.setJobName("Print Data");
-            
-            job.setPrintable(new Printable(){
+        job.setJobName("Print Data");
+        job.setPrintable(new Printable(){
             public int print(Graphics pg,PageFormat pf, int pageNum){
-                    pf.setOrientation(PageFormat.LANDSCAPE);
-                 if(pageNum > 0){
+                pf.setOrientation(PageFormat.LANDSCAPE);
+                if(pageNum > 0){
                     return Printable.NO_SUCH_PAGE;
                 }
                 
@@ -162,22 +163,26 @@ public class Print extends javax.swing.JFrame {
                 g2.scale(0.47,0.47);
                 
                 txtprint.print(g2);
-         
-               
-                return Printable.PAGE_EXISTS;
-                         
                 
+                
+                return Printable.PAGE_EXISTS;
+//                try{
+//                txtprint.print();
+//                    }
+//                catch(Exception e){
+//                }
+
             }
-    });
-            boolean ok = job.printDialog();
+        });
+        boolean ok = job.printDialog();
         if(ok){
-        try{
-            
-        job.print();
-        }
-        catch (PrinterException ex){
-	ex.printStackTrace();
-}
+            try{
+                
+                job.print();
+            }
+            catch (PrinterException ex){
+                ex.printStackTrace();
+            }
         }        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
