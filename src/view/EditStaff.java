@@ -4,13 +4,15 @@
  */
 package view;
 
-import controller.StaffController;
+import controller.EditStaffController;
+import daofile.daoAll;
 import database.DbConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.Statement;
-import model.StaffModel;
+import model.EditStaffModel;
+import static model.EditStaffModel.*;
 
 /**
  *
@@ -25,6 +27,8 @@ public class EditStaff extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,15 +41,15 @@ public class EditStaff extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtField = new javax.swing.JTextField();
-        txtContact = new javax.swing.JTextField();
-        txtCategory = new javax.swing.JTextField();
-        txtShift = new javax.swing.JTextField();
+        txtfield = new javax.swing.JTextField();
+        txtcontact = new javax.swing.JTextField();
+        txtcategory = new javax.swing.JTextField();
+        txtshift = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        txtname = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(285, 255));
@@ -124,15 +128,15 @@ public class EditStaff extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtName)
-                    .addComponent(txtCategory)
-                    .addComponent(txtContact)
-                    .addComponent(txtShift)
-                    .addComponent(txtField)
+                    .addComponent(txtcategory)
+                    .addComponent(txtcontact)
+                    .addComponent(txtshift)
+                    .addComponent(txtfield)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtname))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(bthUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -149,10 +153,10 @@ public class EditStaff extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -160,21 +164,21 @@ public class EditStaff extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcontact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
-                                .addComponent(txtShift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtshift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(bthUpdate)
                                 .addComponent(jButton3))))
-                    .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,67 +197,45 @@ public class EditStaff extends javax.swing.JFrame {
 
     private void bthUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthUpdateActionPerformed
         // TODO add your handling code here:
-        StaffController scontrol = new StaffController(getuser(),this);
-        scontrol.addStaff();
-//        String dId=jTextField6.getText();
-//        String name = txtName.getText();
-//        String field= txtField.getText();
-//        String ph=txtContact.getText();
-//        String exp = txtCategory.getText();
-//        String shift= txtShift.getText();
-//        try{
-//             Connection dbconn = (Connection) DbConnection.connectDB();
-//             Statement st=(Statement)dbconn.createStatement();
-//             st.executeUpdate("update staffs set Name='"+name+"',Field='"+field+"',Contact='"+ph+"',Category='"+exp+"',Shift='"+shift+"'where ID='"+dId+"'");
-//             JOptionPane.showMessageDialog(null, "Successfully Updated!");
-//             setVisible(false);
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e);
-//        }
+        EditStaffController econtrol = new EditStaffController(getuser(),this);
+        if(econtrol.uptStaff()){
+            jTextField6.setText("");
+            txtname.setText("");
+            txtfield.setText("");
+            txtcontact.setText("");
+            txtcategory.setText("");
+            txtshift.setText("");
+        }
     }//GEN-LAST:event_bthUpdateActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
         int s=JOptionPane.showConfirmDialog(null,"Are sure to delete?","Select",JOptionPane.YES_NO_OPTION);
         if(s==0){
-            try{
-                Connection dbconn = (Connection) DbConnection.connectDB();
-                Statement st=(Statement)dbconn.createStatement();
-                st.executeUpdate("delete from staffs where ID='"+dId+"'");
-                JOptionPane.showMessageDialog(null,"Successfully Deleted!");
-                setVisible(false);
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,e);
-            }
+            EditStaffController econtrol = new EditStaffController(getuser(),this);
+            econtrol.delStaff();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            ResultSet rs = st.executeQuery("select * from staffs where ID='"+dId+"'");
-            if(rs.next()){
-                txtName.setText(rs.getString(2));
-                txtField.setText(rs.getString(3));
-                txtContact.setText(rs.getString(4));
-                txtCategory.setText(rs.getString(5));
-                txtShift.setText(rs.getString(6));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+        EditStaffController econtrol = new EditStaffController(getuser(),this);
+        if(econtrol.searchStaff()){
+            
+            txtname.setText(getname());
+            
+            txtfield.setText(getfield());
+            txtcontact.setText(getcontact());
+            txtcategory.setText(getcategory());
+            txtshift.setText(getshift());
         }
+        
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
@@ -304,20 +286,42 @@ public class EditStaff extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField txtCategory;
-    private javax.swing.JTextField txtContact;
-    private javax.swing.JTextField txtField;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtShift;
+    private javax.swing.JTextField txtcategory;
+    private javax.swing.JTextField txtcontact;
+    private javax.swing.JTextField txtfield;
+    private javax.swing.JTextField txtname;
+    private javax.swing.JTextField txtshift;
     // End of variables declaration//GEN-END:variables
-    public StaffModel getuser(){
-    StaffModel stafff = new StaffModel(
-    txtname.getText(),
+    
+    public EditStaffModel getuser(){
+    EditStaffModel stafff = new EditStaffModel(
+       jTextField6.getText(),     
+      txtname.getText(),
      txtfield.getText(),
-      txtcontact.getText(),
-        txtcategory.getText(),
-        txtshift.getText()
+    txtcontact.getText(),
+   txtcategory.getText(),
+     txtshift.getText()
     );
     return stafff;
-}
+    }
+
+    
+    
+    public boolean updateData(){
+            
+        return false;
+    }
+    
+    public boolean deleteData(){
+            jTextField6.setText("");
+            txtname.setText("");
+            txtfield.setText("");
+            txtcontact.setText("");
+            txtcategory.setText("");
+            txtshift.setText("");
+        return false;
+    }
+    
+    
+                
 }

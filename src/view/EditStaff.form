@@ -71,16 +71,16 @@
                   </Group>
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtCategory" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtContact" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtShift" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtcategory" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtcontact" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtshift" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtfield" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jTextField6" pref="131" max="32767" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnSearch" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="txtname" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="62" max="32767" attributes="0"/>
                   <Component id="bthUpdate" min="-2" max="-2" attributes="0"/>
@@ -102,10 +102,10 @@
                           <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtname" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -114,18 +114,18 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtContact" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtcontact" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtcategory" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtShift" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtshift" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="bthUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,9 +133,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="txtField" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtfield" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -205,15 +205,13 @@
             <Property name="text" type="java.lang.String" value="Shift:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtName">
+        <Component class="javax.swing.JTextField" name="txtfield">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtField">
+        <Component class="javax.swing.JTextField" name="txtcontact">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtContact">
+        <Component class="javax.swing.JTextField" name="txtcategory">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCategory">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtShift">
+        <Component class="javax.swing.JTextField" name="txtshift">
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -251,6 +249,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtname">
         </Component>
       </SubComponents>
     </Container>

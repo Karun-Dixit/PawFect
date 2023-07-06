@@ -5,16 +5,23 @@
 package daofile;
 import database.*;
 import java.sql.*;
+import view.EditStaff;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-//import javax.swing.JOptionPane;
-//import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import model.EditStaffModel;
+import static model.EditStaffModel.*;
 /**
  *
  * @author kiYo
  */
 public class daoAll extends DbConnection{
+    private EditStaffModel smodel;
+
+    public daoAll(EditStaffModel smodel) {
+        this.smodel=smodel;
+    }
     
     public static boolean verifyLogin(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE uname = ? AND pass = ?";
@@ -72,22 +79,49 @@ public class daoAll extends DbConnection{
         }
     }
     
-    public static boolean updateStaff(String name, String field, String ph, String exp, String shift) {
-        try(Connection dbconn = (Connection) DbConnection.connectDB()){
-            PreparedStatement st = (PreparedStatement)
-            dbconn.prepareStatement("Insert into staffs(Name,Field,Contact,Category,Shift) values(?,?,?,?,?)");
-            st.setString(1,name);
-            st.setString(2,field);
-            st.setString(3,ph);
-            st.setString(4,exp);
-            st.setString(5,shift);
-            int res = st.executeUpdate();
-            st.close();
-            dbconn.close();
-            return res>0;
-        }catch(SQLException ex){
+    public boolean searchStaff(){
+        String dID=smodel.getdID();
+        try{
+            Connection dbconn = (Connection) DbConnection.connectDB();
+            Statement st=(Statement)dbconn.createStatement();
+            ResultSet rs = st.executeQuery("select * from staffs where ID='"+dID+"'");
+            if(rs.next()){
+                EditStaffModel edstaf=new EditStaffModel(dID,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+                return true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return false;
+    }
+   
+    
+    public boolean updateStaff() {
+        try{
+             Connection dbconn = (Connection) DbConnection.connectDB();
+             Statement st=(Statement)dbconn.createStatement();
+             st.executeUpdate("update staffs set Name='"+getname()+"',Field='"+getfield()+"',Contact='"+getcontact()+"',Category='"+getcategory()+"',Shift='"+getshift()+"'where ID='"+getdID()+"'");
+             JOptionPane.showMessageDialog(null,"Successfully Updated!");
+             return true;
+        }catch(Exception e){
             return false;
         }
+    }
+    
+    public static boolean deleteStaff(String dID, String name, String field, String ph, String exp, String shift) {
+        try{
+                Connection dbconn = (Connection) DbConnection.connectDB();
+                Statement st=(Statement)dbconn.createStatement();
+                st.executeUpdate("delete from staffs where ID='"+dID+"'");
+                JOptionPane.showMessageDialog(null,"Successfully Deleted!");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        return false;
     }
     
 //    public void tableDetails(String var){
@@ -105,5 +139,6 @@ public class daoAll extends DbConnection{
 //    }catch(SQLException e){
 //    }
 //    }
+    
 }
 

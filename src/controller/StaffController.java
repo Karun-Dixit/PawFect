@@ -5,7 +5,6 @@
 package controller;
 import model.StaffModel;
 import view.AddStaff;
-import view.EditStaff;
 import daofile.daoAll;
 /**
  *
@@ -32,19 +31,6 @@ public class StaffController {
             smodel.getshift()
             );
             view.insertData();
-            
-        }
-    }
-    public void uptStaff(){
-        if(view.istovalid()){
-            daoAll.updateStaff(
-            smodel.getname(),
-            smodel.getfield(),
-            smodel.getcontact(),
-            smodel.getcategory(),
-            smodel.getshift()
-            );
-            view.updateData();
             
         }
     }
