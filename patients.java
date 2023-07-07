@@ -145,10 +145,20 @@ public class patients extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(114, 164, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Medications");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(114, 164, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Billings");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(170, 190, 215));
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\User 1\\Downloads\\PawFect\\src\\photo\\ADDr.png")); // NOI18N
@@ -322,6 +332,22 @@ public class patients extends javax.swing.JFrame {
            
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        setVisible(true);
+        close();
+        Billings s = new Billings();
+        s.setTitle("Billings");
+        s.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(true);
+        close();
+        Medications s = new Medications();
+        s.setTitle("Medications");
+        s.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

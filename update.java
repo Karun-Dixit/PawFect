@@ -399,7 +399,7 @@ public class update extends javax.swing.JFrame {
         setVisible(true);
         close();
         patients s = new patients();
-        s.setTitle("Add");
+        s.setTitle("patients");
         s.setVisible(true);          // TODO add your handling code here:
     }//GEN-LAST:event_bckbtnActionPerformed
 
