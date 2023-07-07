@@ -546,7 +546,10 @@ this.dispose();
 
     }
     else{
+         View_ReportModel vrm = new View_ReportModel(sec);
+         vrm.setId(sec);
         Print print=new Print();
+        
     print.show();
 this.dispose();// TODO add your handling code here:
     }

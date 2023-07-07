@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modell.View_ReportModel;
+import static modell.View_ReportModel.*;
 /**
  *
  * @author sashwat
@@ -110,45 +112,6 @@ public class Print extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtprintAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtprintAncestorAdded
-        Connection conn = DbConnection.connectDB();
-                try{
-            String sql="SELECT * FROM staffs ORDER BY ID DESC LIMIT 1";
-                     java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
-                    ResultSet rs = stmt.executeQuery();
-                    rs.next();
-
-                    txtprint.setText(txtprint.getText()+"\tReport"+"\n");
-                      txtprint.setText(txtprint.getText()+"\t\t Boudha,kathmandu\n");
-                      txtprint.setText(txtprint.getText()+"\t\t Contact No:.9849066652");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"\nName::  "+"    "+rs.getString("Name")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Age::          "+rs.getString("Age")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Dob::    "+rs.getString("DOB")+"\n");
-                   txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Breed::   "+rs.getString("Breed")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Weight::   "+rs.getString("Weight")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Contact::   "+rs.getString("Contact")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Test::   "+rs.getString("Tests")+"\n");
-                    txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Result::   "+rs.getString("Report")+"\n");
-     
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }//GEN-LAST:event_txtprintAncestorAdded
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setJobName("Print Data");
         job.setPrintable(new Printable(){
@@ -184,6 +147,48 @@ public class Print extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }        // TODO add your handling code here:
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtprintAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtprintAncestorAdded
+
+     
+        Connection conn = DbConnection.connectDB();
+                try{
+            String sql="SELECT * FROM staffs where ID='"+getId()+"'";
+                     java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
+                    ResultSet rs = stmt.executeQuery();
+                    rs.next();
+
+                    txtprint.setText(txtprint.getText()+"\t          Report"+"\n");
+                      txtprint.setText(txtprint.getText()+"\t        PawFect\n");
+                      txtprint.setText(txtprint.getText()+"\t Boudha,kathmandu");
+                      txtprint.setText(txtprint.getText()+"\n******************************************************");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"\nName::  "+"    "+rs.getString("Name")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Age::          "+rs.getString("Age")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Dob::    "+rs.getString("DOB")+"\n");
+                   txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Breed::   "+rs.getString("Breed")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Weight::   "+rs.getString("Weight")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Contact::   "+rs.getString("Contact")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Test::   "+rs.getString("Tests")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Result::   "+rs.getString("Report")+"\n");
+     
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_txtprintAncestorAdded
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
