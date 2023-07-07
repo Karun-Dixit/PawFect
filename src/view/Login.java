@@ -3,14 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import controller.LoginController;
 import model.loginModel;
@@ -31,6 +23,8 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,6 +196,22 @@ public class Login extends javax.swing.JFrame {
         ds.setVisible(true);
     }//GEN-LAST:event_LoginBtnActionPerformed
     
+     public DashBoard getDashboard() {
+        DashBoard ds = new DashBoard();;
+    return ds;
+    }
+
+    public boolean isErrorMessageDisplayed() {
+        JOptionPane.showMessageDialog(this, "Invalid");
+        // Implement the logic to check if the error message is displayed
+        // You can use the existing code for displaying the error message as a reference
+        // Return true if the error message is displayed, false otherwise
+        return true;
+        // Implement the logic to check if the error message is displayed
+        // You can use the existing code for displaying the error message as a reference
+        // Return true if the error message is displayed, false otherwise
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +265,7 @@ public class Login extends javax.swing.JFrame {
         loginModel lmodel = new loginModel(
                 usernametxt.getText(),
                 passwordtxt.getText()
+                
         );
         return lmodel;
     }
@@ -271,6 +282,8 @@ public class Login extends javax.swing.JFrame {
         }
         return true;
     }
+   
+
 }
     
 
