@@ -4,14 +4,10 @@
  */
 package view;
 
-import database.DbConnection;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import model.StaffModel;
+import controller.StaffController;
 /**
  *
  * @author kiYo
@@ -23,8 +19,17 @@ public class Staff extends javax.swing.JFrame {
      */
     public Staff() {
         initComponents();
-        tableDetails();
-    }
+        StaffController rcontrol=new StaffController(getValueTable(),this);
+        if(!rcontrol.allStaffs()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+//        tableDetails();
+        }
+    public StaffModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) staffTable.getModel();
+        StaffModel obj=new StaffModel(tableName);
+        return obj;
+        }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,7 +252,10 @@ public class Staff extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-       tableDetails();
+        StaffController rcontrol=new StaffController(getValueTable(),this);
+        if(!rcontrol.allStaffs()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
@@ -285,22 +293,22 @@ public class Staff extends javax.swing.JFrame {
         });
     }
     
-    public void tableDetails(){
-        DefaultTableModel dtm = (DefaultTableModel) staffTable.getModel();
-        dtm.setRowCount(0);
-      Statement st=null;
-      ResultSet rs=null;
-    try{
-        Connection dbconn = (Connection) DbConnection.connectDB();
-        st=(Statement)dbconn.createStatement();
-        rs = st.executeQuery("select * from staffs");
-        while(rs.next()){
-            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-        }
-    }catch(SQLException e){
-        JOptionPane.showMessageDialog(rootPane, e);
-    }
-    }
+//    public void tableDetails(){
+//        DefaultTableModel dtm = (DefaultTableModel) staffTable.getModel();
+//        dtm.setRowCount(0);
+//      Statement st=null;
+//      ResultSet rs=null;
+//    try{
+//        Connection dbconn = (Connection) DbConnection.connectDB();
+//        st=(Statement)dbconn.createStatement();
+//        rs = st.executeQuery("select * from staffs");
+//        while(rs.next()){
+//            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
+//        }
+//    }catch(SQLException e){
+//        JOptionPane.showMessageDialog(rootPane, e);
+//    }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

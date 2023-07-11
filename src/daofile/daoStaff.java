@@ -3,64 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package daofile;
-import database.*;
-import java.sql.*;
-import view.EditStaff;
+
+import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.EditStaffModel;
-import static model.EditStaffModel.*;
+import static model.EditStaffModel.getcategory;
+import static model.EditStaffModel.getcontact;
+import static model.EditStaffModel.getdID;
+import static model.EditStaffModel.getfield;
+import static model.EditStaffModel.getname;
+import static model.EditStaffModel.getshift;
+import model.StaffModel;
+
 /**
  *
  * @author kiYo
  */
-public class daoAll extends DbConnection{
+public class daoStaff {
     private EditStaffModel smodel;
 
-    public daoAll(EditStaffModel smodel) {
+    public daoStaff(EditStaffModel smodel) {
         this.smodel=smodel;
     }
     
-    public static boolean verifyLogin(String username, String password) {
-        String query = "SELECT COUNT(*) FROM users WHERE uname = ? AND pass = ?";
-        try (Connection connection = (Connection) DbConnection.connectDB();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
-            
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                return count > 0;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error verifying login: " + e.getMessage());
-        }
-        
-        return false;
+    private StaffModel model;
+    public daoStaff(StaffModel model) {
+        this.model=model;
     }
-    
-    public static boolean saveToDatabase(String fname, String lname, String ph, String uname, String pass, String connpass) {
-        try(Connection dbconn = (Connection) DbConnection.connectDB()){
-            PreparedStatement st = (PreparedStatement)
-            dbconn.prepareStatement("Insert into Users(fName,lName,PhNum,uName,pass,connpass) values(?,?,?,?,?,?)");
-            st.setString(1,fname);
-            st.setString(2,lname);
-            st.setString(3,ph);
-            st.setString(4,uname);
-            st.setString(5,pass);
-            st.setString(6,connpass);
-            int res = st.executeUpdate();
-            st.close();
-            dbconn.close();
-            return res>0;
-        }catch(SQLException ex){
-            return false;
-        }
-    }
-    
     public static boolean saveToStaff(String name, String field, String ph, String exp, String shift) {
         try(Connection dbconn = (Connection) DbConnection.connectDB()){
             PreparedStatement st = (PreparedStatement)
@@ -112,6 +87,7 @@ public class daoAll extends DbConnection{
         }
     }
     
+    
     public boolean deleteStaff() {
         try{
                 Connection dbconn = (Connection) DbConnection.connectDB();
@@ -125,21 +101,23 @@ public class daoAll extends DbConnection{
         return false;
     }
     
-//    public void tableDetails(String var){
-//        DefaultTableModel dtm = (DefaultTableModel) var.getModel(staffTable);
-//        dtm.setRowCount(0);
-//      Statement st=null;
-//      ResultSet rs=null;
-//    try{
-//        Connection dbconn = (Connection) DbConnection.connectDB();
-//        st=(Statement)dbconn.createStatement();
-//        rs = st.executeQuery("select * from staffs");
-//        while(rs.next()){
-//            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-//        }
-//    }catch(SQLException e){
-//    }
-//    }
     
+    
+    public boolean allStaffs(){
+        DefaultTableModel a=model.getTableName();
+        a.setRowCount(0);
+        try{
+            Connection connect = (Connection) DbConnection.connectDB();
+            Statement statement= connect.createStatement();
+            ResultSet result= statement.executeQuery("select * from staffs");
+            while(result.next()){
+                a.addRow(new Object[]{result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getString(6)});
+            }
+            return true;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return false;
+    }    
 }
-

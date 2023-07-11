@@ -5,7 +5,7 @@
 package controller;
 import view.Login;
 import model.loginModel;
-import daofile.daoAll;
+import daofile.daoLS;
 
 
 public class LoginController {
@@ -18,11 +18,12 @@ public class LoginController {
         this.view = view;
     }
     
-    public void verifyuser(){
+    public boolean verifyuser(){
         if(view.isvalid()){
-            if(daoAll.verifyLogin(lmodel.getUsername(),lmodel.getPassword())){
+            if(daoLS.verifyLogin(lmodel.getUsername(),lmodel.getPassword())){
             } else{
             }
    }
+        return true;
    }
 }

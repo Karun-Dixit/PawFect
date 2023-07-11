@@ -4,34 +4,22 @@
  */
 package controller;
 import model.StaffModel;
-import view.AddStaff;
-import daofile.daoAll;
+import view.Staff;
+import daofile.daoStaff;
 /**
  *
  * @author kiYo
  */
 public class StaffController {
-    private StaffModel smodel;
-    private AddStaff view;
-    
-    public StaffController(StaffModel smodel, AddStaff view){
-        this.smodel = smodel;
-        this.view = view;
+    private StaffModel model;
+    private Staff view;
+    public StaffController(StaffModel model, Staff view) {
+        this.model=model;
+        this.view=view;
     }
-    public StaffController(AddStaff view){
-        this.view = view;
-    }
-    public void addStaff(){
-        if(view.isvalid()){
-            daoAll.saveToStaff(
-            smodel.getname(),
-            smodel.getfield(),
-            smodel.getcontact(),
-            smodel.getcategory(),
-            smodel.getshift()
-            );
-            view.insertData();
-            
-        }
+
+    public boolean allStaffs(){
+        daoStaff object=new daoStaff(model);
+        return object.allStaffs();
     }
 }

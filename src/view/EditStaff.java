@@ -5,12 +5,7 @@
 package view;
 
 import controller.EditStaffController;
-import daofile.daoAll;
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import java.sql.Statement;
 import model.EditStaffModel;
 import static model.EditStaffModel.*;
 

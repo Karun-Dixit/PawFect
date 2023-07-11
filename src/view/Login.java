@@ -8,7 +8,7 @@ import controller.LoginController;
 import model.loginModel;
 import static model.loginModel.passwordvalidation;
 import static model.loginModel.usernamevalidation;
-
+import org.junit.*;
 
 /**
  *
@@ -189,11 +189,15 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
+        Assert.assertEquals("Username field empty",false,usernametxt.getText().length()==0);
+        Assert.assertEquals("Password field empty",false, passwordtxt.getText().length()==0);
         LoginController lcontrol = new LoginController(getuser(),this);
-        lcontrol.verifyuser();
-        setVisible(false); 
-        DashBoard ds = new DashBoard();
-        ds.setVisible(true);
+        if(lcontrol.verifyuser()){
+            setVisible(false); 
+            DashBoard ds = new DashBoard();
+            ds.setVisible(true);
+        }
+        
     }//GEN-LAST:event_LoginBtnActionPerformed
     
      public DashBoard getDashboard() {

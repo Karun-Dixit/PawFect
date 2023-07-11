@@ -15,6 +15,7 @@ import static model.SignUpModel.phnumvalidation;
 import static model.SignUpModel.pwdvalidation;
 import static model.SignUpModel.samepwdvalidation;
 import static model.SignUpModel.usernamevalidation;
+import org.junit.*;
 
 /**
  *
@@ -285,6 +286,15 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_conPassActionPerformed
 
     private void BtnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSignUpActionPerformed
+       Assert.assertEquals("First Name field empty",false, firstName.getText().length()==0);
+       Assert.assertEquals("Last Name field empty",false, lastName.getText().length()==0);
+       Assert.assertEquals("Phone Number field empty",false, PhNum.getText().length()==0);
+       Assert.assertEquals("User Name field empty",false, userName.getText().length()==0);
+       Assert.assertEquals("Password field empty",false, password.getText().length()==0);
+       Assert.assertEquals("Confirm password field empty",false, conPass.getText().length()==0);
+       Assert.assertEquals("password does not match",true, password.getText().equals(conPass.getText()));
+       Assert.assertEquals("Number should be of 10 digits",true, PhNum.getText().length()==10);
+        
         SignUpController scontrol = new SignUpController(getuser(),this);
         scontrol.signupuser();
     }//GEN-LAST:event_BtnSignUpActionPerformed

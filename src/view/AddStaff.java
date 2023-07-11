@@ -1,14 +1,14 @@
 
 package view;
 
-import controller.StaffController;
+import controller.AddStaffController;
 import javax.swing.JOptionPane;
-import model.StaffModel;
-import static model.StaffModel.categoryvalidation;
-import static model.StaffModel.contactvalidation;
-import static model.StaffModel.fieldvalidation;
-import static model.StaffModel.namevalidation;
-import static model.StaffModel.shiftvalidation;
+import model.AddStaffModel;
+import static model.AddStaffModel.categoryvalidation;
+import static model.AddStaffModel.contactvalidation;
+import static model.AddStaffModel.fieldvalidation;
+import static model.AddStaffModel.namevalidation;
+import static model.AddStaffModel.shiftvalidation;
 
 /**
  *
@@ -151,7 +151,7 @@ public class AddStaff extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        StaffController scontrol = new StaffController(getuser(),this);
+        AddStaffController scontrol = new AddStaffController(getuser(),this);
         scontrol.addStaff();
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -206,8 +206,8 @@ public class AddStaff extends javax.swing.JFrame {
     private javax.swing.JTextField txtshift;
     // End of variables declaration//GEN-END:variables
 
-public StaffModel getuser(){
-    StaffModel stafff = new StaffModel(
+public AddStaffModel getuser(){
+    AddStaffModel stafff = new AddStaffModel(
     txtname.getText(),
      txtfield.getText(),
       txtcontact.getText(),

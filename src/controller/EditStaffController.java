@@ -4,7 +4,7 @@
  */
 package controller;
 
-import daofile.daoAll;
+import daofile.daoStaff;
 import model.EditStaffModel;
 import view.EditStaff;
 
@@ -25,15 +25,15 @@ public class EditStaffController {
         this.view = view;
     }
     public boolean uptStaff(){
-        daoAll o=new daoAll(smodel);
+        daoStaff o=new daoStaff(smodel);
         return o.updateStaff();
     }
     public boolean delStaff(){
-            daoAll dd=new daoAll(smodel);
+            daoStaff dd=new daoStaff(smodel);
             return dd.deleteStaff();
     }
     public boolean searchStaff(){
-        daoAll o=new daoAll(smodel);
+        daoStaff o=new daoStaff(smodel);
         return o.searchStaff();
     }
 }

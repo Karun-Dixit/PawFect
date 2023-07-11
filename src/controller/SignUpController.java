@@ -5,7 +5,7 @@
 package controller;
 import model.SignUpModel;
 import view.Signup;
-import daofile.daoAll;
+import daofile.daoLS;
 
 
 /**
@@ -25,7 +25,7 @@ public class SignUpController {
     }
     public void signupuser(){
         if(view.isvalid()){
-            daoAll.saveToDatabase(
+            daoLS.saveToDatabase(
             smodel.getfname(),
             smodel.getlname(),
             smodel.getph(),
