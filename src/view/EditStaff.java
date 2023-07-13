@@ -42,7 +42,7 @@ public class EditStaff extends javax.swing.JFrame {
         txtshift = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        dID = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         txtname = new javax.swing.JTextField();
 
@@ -128,7 +128,7 @@ public class EditStaff extends javax.swing.JFrame {
                     .addComponent(txtshift)
                     .addComponent(txtfield)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(dID, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtname))
@@ -147,7 +147,7 @@ public class EditStaff extends javax.swing.JFrame {
                     .addComponent(btnSearch)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -194,7 +194,7 @@ public class EditStaff extends javax.swing.JFrame {
         // TODO add your handling code here:
         EditStaffController econtrol = new EditStaffController(getuser(),this);
         if(econtrol.uptStaff()){
-            jTextField6.setText("");
+            dID.setText("");
             txtname.setText("");
             txtfield.setText("");
             txtcontact.setText("");
@@ -209,7 +209,7 @@ public class EditStaff extends javax.swing.JFrame {
         if(s==0){
             EditStaffController econtrol = new EditStaffController(getuser(),this);
             if(econtrol.delStaff()){
-                jTextField6.setText("");
+                dID.setText("");
                 txtname.setText("");
                 txtfield.setText("");
                 txtcontact.setText("");
@@ -241,7 +241,7 @@ public class EditStaff extends javax.swing.JFrame {
     
     public EditStaffModel getuser(){
     EditStaffModel stafff = new EditStaffModel(
-       jTextField6.getText(),     
+       dID.getText(),     
       txtname.getText(),
      txtfield.getText(),
     txtcontact.getText(),
@@ -289,6 +289,7 @@ public class EditStaff extends javax.swing.JFrame {
     private javax.swing.JButton bthUpdate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JTextField dID;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,7 +298,6 @@ public class EditStaff extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtcategory;
     private javax.swing.JTextField txtcontact;
     private javax.swing.JTextField txtfield;

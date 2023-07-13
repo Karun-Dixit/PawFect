@@ -326,7 +326,7 @@ public class AddPatients extends javax.swing.JFrame {
             return false;
         }
         if (!dobvalidation(dob)) {
-            JOptionPane.showMessageDialog(this, "Please enter category");
+            JOptionPane.showMessageDialog(this, "Please enter dob in YYYY-MM-DD");
             return false;
         }
         if (!fieldvalidation(field)) {
@@ -374,7 +374,5 @@ public class AddPatients extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    private boolean namevalidation(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

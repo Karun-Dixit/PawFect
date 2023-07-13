@@ -27,7 +27,7 @@ public class DepartmentHorses extends javax.swing.JFrame {
         }
     }
     public HorsesModel getValueTable(){
-        DefaultTableModel tableName=(DefaultTableModel) HorsesTable.getModel();
+        DefaultTableModel tableName=(DefaultTableModel) horsesTable.getModel();
         HorsesModel obj=new HorsesModel(tableName);
         return obj;
     }
@@ -51,7 +51,7 @@ public class DepartmentHorses extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        HorsesTable = new javax.swing.JTable();
+        horsesTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
@@ -100,9 +100,9 @@ public class DepartmentHorses extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        HorsesTable.setBackground(new java.awt.Color(250, 250, 250));
-        HorsesTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        HorsesTable.setModel(new javax.swing.table.DefaultTableModel(
+        horsesTable.setBackground(new java.awt.Color(250, 250, 250));
+        horsesTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        horsesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -124,9 +124,9 @@ public class DepartmentHorses extends javax.swing.JFrame {
                 "ID", "Name", "Qualification", "Type", "Timing"
             }
         ));
-        HorsesTable.setRowHeight(20);
-        HorsesTable.setShowGrid(true);
-        jScrollPane1.setViewportView(HorsesTable);
+        horsesTable.setRowHeight(20);
+        horsesTable.setShowGrid(true);
+        jScrollPane1.setViewportView(horsesTable);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/add1.png"))); // NOI18N
         btnAdd.setContentAreaFilled(false);
@@ -293,11 +293,11 @@ public class DepartmentHorses extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable HorsesTable;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JTable horsesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

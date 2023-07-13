@@ -76,7 +76,7 @@
                       <Component id="txtshift" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtfield" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jTextField6" pref="131" max="32767" attributes="0"/>
+                          <Component id="dID" pref="131" max="32767" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnSearch" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
@@ -99,7 +99,7 @@
                       <Component id="btnSearch" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="28" max="32767" attributes="0"/>
@@ -235,7 +235,7 @@
             <Property name="text" type="java.lang.String" value="Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="dID">
         </Component>
         <Component class="javax.swing.JButton" name="btnSearch">
           <Properties>

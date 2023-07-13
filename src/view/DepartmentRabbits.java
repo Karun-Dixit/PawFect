@@ -4,13 +4,11 @@
  */
 package view;
 
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import controller.RabbitsController;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.RabbitsModel;
+
 
 /**
  *
@@ -23,8 +21,17 @@ public class DepartmentRabbits extends javax.swing.JFrame {
      */
     public DepartmentRabbits() {
         initComponents();
-        tableDetails();
-    }
+        RabbitsController rcontrol=new RabbitsController(getValueTable(),this);
+        if(!rcontrol.allRabbits()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        }
+    public RabbitsModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) rabbitsTable.getModel();
+        RabbitsModel obj=new RabbitsModel(tableName);
+        return obj;
+        }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +51,7 @@ public class DepartmentRabbits extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        rabbitTable = new javax.swing.JTable();
+        rabbitsTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
@@ -93,9 +100,9 @@ public class DepartmentRabbits extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        rabbitTable.setBackground(new java.awt.Color(250, 250, 250));
-        rabbitTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        rabbitTable.setModel(new javax.swing.table.DefaultTableModel(
+        rabbitsTable.setBackground(new java.awt.Color(250, 250, 250));
+        rabbitsTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        rabbitsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -117,9 +124,9 @@ public class DepartmentRabbits extends javax.swing.JFrame {
                 "ID", "Name", "Qualification", "Type", "Timing"
             }
         ));
-        rabbitTable.setRowHeight(20);
-        rabbitTable.setShowGrid(true);
-        jScrollPane1.setViewportView(rabbitTable);
+        rabbitsTable.setRowHeight(20);
+        rabbitsTable.setShowGrid(true);
+        jScrollPane1.setViewportView(rabbitsTable);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/add1.png"))); // NOI18N
         btnAdd.setContentAreaFilled(false);
@@ -245,7 +252,10 @@ public class DepartmentRabbits extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        tableDetails();
+        RabbitsController rcontrol=new RabbitsController(getValueTable(),this);
+        if(!rcontrol.allRabbits()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
@@ -282,23 +292,6 @@ public class DepartmentRabbits extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void tableDetails(){
-        DefaultTableModel dtm = (DefaultTableModel) rabbitTable.getModel();
-        dtm.setRowCount(0);
-      Statement st=null;
-      ResultSet rs=null;
-    try{
-        Connection dbconn = (Connection) DbConnection.connectDB();
-        st=(Statement)dbconn.createStatement();
-        rs = st.executeQuery("select * from Rabbits");
-        while(rs.next()){
-            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
-        }
-    }catch(SQLException e){
-        JOptionPane.showMessageDialog(rootPane, e);
-    }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -313,6 +306,6 @@ public class DepartmentRabbits extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable rabbitTable;
+    private javax.swing.JTable rabbitsTable;
     // End of variables declaration//GEN-END:variables
 }

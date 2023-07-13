@@ -7,14 +7,30 @@ package daofile;
 import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import static model.EditPatientsModel.*;
+import model.EditPatientsModel;
+//import model.PatientsModel;
 
 /**
  *
  * @author kiYo
  */
 public class daoPatients {
+    private EditPatientsModel smodel;
+
+    public daoPatients(EditPatientsModel smodel) {
+        this.smodel=smodel;
+    }
+    
+//    private PatientsModel model;
+//    public daoPatients(PatientsModel model) {
+//        this.model=model;
+//    }
+    
     public static boolean saveToPatients(String name, String age, String dob, String field, String owner, String contact) {
         System.out.println(name);
         try(Connection dbconn = (Connection) DbConnection.connectDB()){
@@ -36,4 +52,52 @@ public class daoPatients {
             return false;
         }
     }
+    
+    public boolean searchPatients(){
+        String dID=smodel.getdID();
+        try{
+            Connection dbconn = (Connection) DbConnection.connectDB();
+            Statement st=(Statement)dbconn.createStatement();
+            ResultSet rs = st.executeQuery("select * from patients where ID='"+dID+"'");
+            if(rs.next()){
+                EditPatientsModel edstaf=new EditPatientsModel(dID,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+                return true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return false;
+    }
+   
+    
+    public boolean updatePatients() {
+        try{
+             Connection dbconn = (Connection) DbConnection.connectDB();
+             Statement st=(Statement)dbconn.createStatement();
+             st.executeUpdate("update patients set PatientName='"+getName()+"',Age='"+getAge()+"',DOB='"+getDob()+"',Field='"+getField()+"',OwnerName='"+getOwner()+"',Contact='"+getContact()+"'where ID='"+getdID()+"'");
+             JOptionPane.showMessageDialog(null,"Successfully Updated!");
+             return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    
+    public boolean deletePatients() {
+        try{
+                Connection dbconn = (Connection) DbConnection.connectDB();
+                Statement st=(Statement)dbconn.createStatement();
+                st.executeUpdate("delete from patients where ID='"+getdID()+"'");
+                JOptionPane.showMessageDialog(null,"Successfully Deleted!");
+                return true;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        return false;
+    }
+    
 }

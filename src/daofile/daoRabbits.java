@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-//import javax.swing.table.DefaultTableModel;
-//import model.RabbitsModel;
+import javax.swing.table.DefaultTableModel;
+import model.RabbitsModel;
 import model.EditRabbitsModel;
 import static model.EditRabbitsModel.getNameC;
 import static model.EditRabbitsModel.getQualification;
@@ -31,14 +31,14 @@ public class daoRabbits {
     public daoRabbits(EditRabbitsModel cmodel){
         this.cmodel=cmodel;
     }
-//    private RabbitsModel catmodel;
-//    public daoRabbits(RabbitsModel catmodel) {
-//        this.catmodel=catmodel;
-//    }
+    private RabbitsModel rabbitmodel;
+    public daoRabbits(RabbitsModel rabbitmodel) {
+        this.rabbitmodel=rabbitmodel;
+    }
     public static boolean saveToRabbits(String Name, String Qualification, String Type, String Timing) {
         try(Connection dbconn = (Connection) DbConnection.connectDB()){
             PreparedStatement st = (PreparedStatement)
-            dbconn.prepareStatement("Insert into Rabbits(Name,Qualification,Type,Timing) values(?,?,?,?)");
+            dbconn.prepareStatement("Insert into Rabbits(Name,Qualifications,Type,Timing) values(?,?,?,?)");
             st.setString(1,Name);
             st.setString(2,Qualification);
             st.setString(3,Type);
@@ -102,22 +102,22 @@ public class daoRabbits {
     }
     
     //Rabbits All....
-//    public boolean allRabbits(){
-//        DefaultTableModel a=catmodel.getTableName();
-//        a.setRowCount(0);
-//        try{
-//            Connection connect = (Connection) DbConnection.connectDB();
-//            Statement statement= connect.createStatement();
-//            ResultSet result= statement.executeQuery("select * from Rabbits");
-//            while(result.next()){
-//                a.addRow(new Object[]{result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5)});
-//            }
-//            return true;
-//        }
-//        catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-//        }
-//        return false;
-//    }    
+    public boolean allRabbits(){
+        DefaultTableModel a=rabbitmodel.getTableName();
+        a.setRowCount(0);
+        try{
+            Connection connect = (Connection) DbConnection.connectDB();
+            Statement statement= connect.createStatement();
+            ResultSet result= statement.executeQuery("select * from Rabbits");
+            while(result.next()){
+                a.addRow(new Object[]{result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5)});
+            }
+            return true;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return false;
+    }    
     
 }
