@@ -8,6 +8,7 @@ import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.sql.SQLException;
  */
 public class daoPatients {
     public static boolean saveToPatients(String name, String age, String dob, String field, String owner, String contact) {
+        System.out.println(name);
         try(Connection dbconn = (Connection) DbConnection.connectDB()){
             PreparedStatement st = (PreparedStatement)
             dbconn.prepareStatement("Insert into patients(PatientName,Age,DOB,Field,OwnerName,Contact) values(?,?,?,?,?,?)");
@@ -23,12 +25,14 @@ public class daoPatients {
             st.setString(3,dob);
             st.setString(4,field);
             st.setString(5,owner);
-            st.setString(5,contact);
+            st.setString(6,contact);
             int res = st.executeUpdate();
+            JOptionPane.showMessageDialog(null, "User data inserted", "Success", JOptionPane.INFORMATION_MESSAGE);
             st.close();
             dbconn.close();
             return res>0;
         }catch(SQLException ex){
+            System.out.println(ex.getMessage());  
             return false;
         }
     }

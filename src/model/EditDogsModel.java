@@ -31,11 +31,11 @@ public class EditDogsModel {
         EditDogsModel.dID = dID;
     }
 
-    public static String getName() {
+    public static String getNameD() {
         return Name;
     }
 
-    public static void setName(String Name) {
+    public static void setNameD(String Name) {
         EditDogsModel.Name = Name;
     }
 
@@ -47,11 +47,11 @@ public class EditDogsModel {
         EditDogsModel.Qualification = Qualification;
     }
 
-    public static String getType() {
+    public static String getType1() {
         return Type;
     }
 
-    public static void setType(String Type) {
+    public static void setType1(String Type) {
         EditDogsModel.Type = Type;
     }
 

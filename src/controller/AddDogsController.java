@@ -3,13 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-
 import model.AddDogsModel;
 import view.AddDogs;
-import daofile.daoDepartments;
+import daofile.daoDogs;
 /**
  *
- * @author Karun Dixit
+ * @author kiyo
  */
 public class AddDogsController {
     private AddDogsModel dmodel;
@@ -24,7 +23,7 @@ public class AddDogsController {
     }
     public void addDogs(){
         if(view.isvalid()){
-            daoDepartments.saveToDogs(
+            daoDogs.saveToDogs(
             dmodel.getName(),
             dmodel.getQualification(),
             dmodel.getType(),

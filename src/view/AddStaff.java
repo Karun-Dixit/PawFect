@@ -224,7 +224,7 @@ public boolean isvalid() {
         String category = txtcategory.getText();
         String shift= txtshift.getText();
         if (!(namevalidation(name) || fieldvalidation(field) || contactvalidation(contact)|| categoryvalidation(category) || shiftvalidation(shift))) {
-//            JOptionPane.showMessageDialog(this, "One or more fields empty");
+            JOptionPane.showMessageDialog(this, "One or more fields empty");
             return false;
         }
         if (!namevalidation(name)) {

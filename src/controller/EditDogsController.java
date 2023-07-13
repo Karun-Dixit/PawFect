@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import daofile.daoDepartments;
+import daofile.daoDogs;
 import model.EditDogsModel;
 import view.EditDogs;
 /**
@@ -23,15 +23,15 @@ public class EditDogsController {
         this.view = view;
     }
     public boolean uptDogs(){
-        daoDepartments o=new daoDepartments(emodel);
+        daoDogs o=new daoDogs(emodel);
         return o.updateDogs();
     }
     public boolean delDogs(){
-            daoDepartments dd=new daoDepartments(emodel);
+            daoDogs dd=new daoDogs(emodel);
             return dd.deleteDogs();
     }
-    public boolean searchStaff(){
-        daoDepartments o=new daoDepartments(emodel);
+    public boolean searchDogs(){
+        daoDogs o=new daoDogs(emodel);
         return o.searchDogs();
     }
 }

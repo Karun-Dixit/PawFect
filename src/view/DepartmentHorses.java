@@ -4,13 +4,11 @@
  */
 package view;
 
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import controller.HorsesController;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.HorsesModel;
+
 
 /**
  *
@@ -23,8 +21,17 @@ public class DepartmentHorses extends javax.swing.JFrame {
      */
     public DepartmentHorses() {
         initComponents();
-        tableDetails();
+        HorsesController rcontrol=new HorsesController(getValueTable(),this);
+        if(!rcontrol.allHorses()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }
+    public HorsesModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) HorsesTable.getModel();
+        HorsesModel obj=new HorsesModel(tableName);
+        return obj;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +51,7 @@ public class DepartmentHorses extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        horseTable = new javax.swing.JTable();
+        HorsesTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
@@ -93,9 +100,9 @@ public class DepartmentHorses extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        horseTable.setBackground(new java.awt.Color(250, 250, 250));
-        horseTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        horseTable.setModel(new javax.swing.table.DefaultTableModel(
+        HorsesTable.setBackground(new java.awt.Color(250, 250, 250));
+        HorsesTable.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        HorsesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -117,9 +124,9 @@ public class DepartmentHorses extends javax.swing.JFrame {
                 "ID", "Name", "Qualification", "Type", "Timing"
             }
         ));
-        horseTable.setRowHeight(20);
-        horseTable.setShowGrid(true);
-        jScrollPane1.setViewportView(horseTable);
+        HorsesTable.setRowHeight(20);
+        HorsesTable.setShowGrid(true);
+        jScrollPane1.setViewportView(HorsesTable);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/add1.png"))); // NOI18N
         btnAdd.setContentAreaFilled(false);
@@ -245,7 +252,10 @@ public class DepartmentHorses extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        tableDetails();
+        HorsesController rcontrol=new HorsesController(getValueTable(),this);
+        if(!rcontrol.allHorses()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
@@ -282,29 +292,12 @@ public class DepartmentHorses extends javax.swing.JFrame {
             }
         });
     }
-        public void tableDetails(){
-        DefaultTableModel dtm = (DefaultTableModel) horseTable.getModel();
-        dtm.setRowCount(0);
-      Statement st=null;
-      ResultSet rs=null;
-    try{
-        Connection dbconn = (Connection) DbConnection.connectDB();
-        st=(Statement)dbconn.createStatement();
-        rs = st.executeQuery("select * from Horses");
-        while(rs.next()){
-            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
-        }
-    }catch(SQLException e){
-        JOptionPane.showMessageDialog(rootPane, e);
-    }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable HorsesTable;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JTable horseTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

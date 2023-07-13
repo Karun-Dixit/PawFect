@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
+import controller.EditHorsesController;
 import javax.swing.JOptionPane;
-import java.sql.Statement;
+import model.EditHorsesModel;
+import static model.EditHorsesModel.*;
 /**
  *
  * @author kiYo
@@ -38,13 +36,13 @@ public class EditHorses extends javax.swing.JFrame {
         bthUpdate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        Name = new javax.swing.JTextField();
-        Qualifications = new javax.swing.JTextField();
-        Type = new javax.swing.JTextField();
-        Timing = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        txtQualification = new javax.swing.JTextField();
+        txtType = new javax.swing.JTextField();
+        txtTime = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        dID = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,12 +80,12 @@ public class EditHorses extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jLabel5.setText("Timing:");
 
-        jButton3.setBackground(new java.awt.Color(80, 131, 233));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jButton3.setText("DELETE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(80, 131, 233));
+        btnDelete.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -122,20 +120,20 @@ public class EditHorses extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 3, Short.MAX_VALUE)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                                 .addComponent(bthUpdate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)
+                                .addComponent(btnDelete)
                                 .addGap(19, 19, 19))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Qualifications, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Timing, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtQualification, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,27 +145,27 @@ public class EditHorses extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnSearch)
                         .addComponent(jLabel2))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Qualifications, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQualification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Timing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bthUpdate)
-                    .addComponent(jButton3))
+                    .addComponent(btnDelete))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -188,19 +186,13 @@ public class EditHorses extends javax.swing.JFrame {
 
     private void bthUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthUpdateActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        String name = Name.getText();
-        String field= Qualifications.getText();
-        String ph=Type.getText();
-        String exp = Timing.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            st.executeUpdate("update Horses set Name='"+name+"',Qualifications='"+field+"',Type='"+ph+"',Timing='"+exp+"'where ID='"+dId+"'");
-            JOptionPane.showMessageDialog(null, "Successfully Updated!");
-            setVisible(false);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        EditHorsesController econtrol = new EditHorsesController(getuser(),this);
+        if(econtrol.uptHorses()){
+        dID.setText("");
+        txtName.setText("");
+        txtQualification.setText("");
+        txtType.setText("");
+        txtTime.setText("");
         }
     }//GEN-LAST:event_bthUpdateActionPerformed
 
@@ -209,42 +201,31 @@ public class EditHorses extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
         int s=JOptionPane.showConfirmDialog(null,"Are sure to delete?","Select",JOptionPane.YES_NO_OPTION);
         if(s==0){
-            try{
-                Connection dbconn = (Connection) DbConnection.connectDB();
-                Statement st=(Statement)dbconn.createStatement();
-                st.executeUpdate("delete from Horses where ID='"+dId+"'");
-                JOptionPane.showMessageDialog(null,"Successfully Deleted!");
-                setVisible(false);
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,e);
-            }
+            EditHorsesController econtrol = new EditHorsesController(getuser(),this);
+            if(econtrol.delHorses()){
+            dID.setText("");
+            txtName.setText("");
+            txtQualification.setText("");
+            txtType.setText("");
+            txtTime.setText("");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            ResultSet rs = st.executeQuery("select * from Horses where ID='"+dId+"'");
-            if(rs.next()){
-                Name.setText(rs.getString(2));
-                Qualifications.setText(rs.getString(3));
-                Type.setText(rs.getString(4));
-                Timing.setText(rs.getString(5));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+        EditHorsesController econtrol = new EditHorsesController(getuser(),this);
+        if(econtrol.searchHorses()){
+        txtName.setText(getNameH());
+        txtQualification.setText(getQualification());
+        txtType.setText(getType1());
+        txtTime.setText(getTiming());
         }
+         
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
@@ -283,20 +264,30 @@ public class EditHorses extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Name;
-    private javax.swing.JTextField Qualifications;
-    private javax.swing.JTextField Timing;
-    private javax.swing.JTextField Type;
     private javax.swing.JButton bthUpdate;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JTextField dID;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtQualification;
+    private javax.swing.JTextField txtTime;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
+    public EditHorsesModel getuser(){
+        EditHorsesModel horsesss= new EditHorsesModel(
+            dID.getText(),
+            txtName.getText(),
+            txtQualification.getText(),
+            txtType.getText(),
+            txtTime.getText()
+        );
+        return horsesss;
+    }
 }

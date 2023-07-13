@@ -4,13 +4,10 @@
  */
 package view;
 
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import controller.AddHorsesController;
 import javax.swing.JOptionPane;
+import model.AddHorsesModel;
+import static model.AddHorsesModel.*;
 
 
 /**
@@ -43,7 +40,7 @@ public class AddHorses extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Name = new javax.swing.JTextField();
-        Qualifications = new javax.swing.JTextField();
+        Qualification = new javax.swing.JTextField();
         Type = new javax.swing.JTextField();
         Timing = new javax.swing.JTextField();
 
@@ -102,7 +99,7 @@ public class AddHorses extends javax.swing.JFrame {
                     .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Timing, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Qualifications, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Qualification, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(244, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,7 +117,7 @@ public class AddHorses extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(Qualifications, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Qualification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -160,18 +157,8 @@ public class AddHorses extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String name = Name.getText();
-        String field= Qualifications.getText();
-        String ph=Type.getText();
-        String exp = Timing.getText();
-        Connection dbconnec = (Connection) DbConnection.connectDB();
-        PreparedStatement pt = null;
-        if(name.isEmpty() || field.isEmpty() || ph.isEmpty() || exp.isEmpty()){
-            JOptionPane.showMessageDialog(this,"One or more field empty!","Error",JOptionPane.ERROR_MESSAGE);
-        }else{
-            addRabbits(name,field,ph,exp);
-
-        }
+        AddHorsesController scontrol = new AddHorsesController(getuser(),this);
+        scontrol.addHorses();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -216,7 +203,7 @@ public class AddHorses extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Name;
-    private javax.swing.JTextField Qualifications;
+    private javax.swing.JTextField Qualification;
     private javax.swing.JTextField Timing;
     private javax.swing.JTextField Type;
     private javax.swing.JButton btnAdd;
@@ -227,34 +214,48 @@ public class AddHorses extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
- private void addRabbits(String name, String field, String ph, String exp) {
-        Connection dbconn = (Connection) DbConnection.connectDB();
-        if(dbconn != null){
-        try{
-            PreparedStatement st = (PreparedStatement)
-                    dbconn.prepareStatement("Insert into Horses(Name,Qualifications,Type,Timing) values(?,?,?,?)");
-            st.setString(1,name);
-            st.setString(2,field);
-            st.setString(3,ph);
-            st.setString(4,exp);
-            int res = st.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data inserted", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
+    public AddHorsesModel getuser(){
+    AddHorsesModel horsesss = new AddHorsesModel(
+        Name.getText(),
+        Qualification.getText(),
+        Type.getText(),
+        Timing.getText()
+    );
+    return horsesss;
+}
+public boolean isvalid() {
+        String name = Name.getText();
+        String quali= Qualification.getText();
+        String type=Type.getText();
+        String timing = Timing.getText();
+        if (!(namevalidation(name) || qualificationvalidation(quali) || typevalidation(type)|| timingvalidation(timing))) {
+           JOptionPane.showMessageDialog(this, "One or more fields empty");
+            return false;
+        }
+        if (!namevalidation(name)) {
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            return false;
+        }
+        if (!qualificationvalidation(quali)) {
+            JOptionPane.showMessageDialog(this, "Please enter Qualification");
+            return false;
+        }
+        if (!typevalidation(type)) {
+            JOptionPane.showMessageDialog(this, "Please enter type");
+            return false;
+        }
+        if (!timingvalidation(timing)) {
+            JOptionPane.showMessageDialog(this, "Please enter timing");
+            return false;
+        }
+        
+        return true;
+}
+public boolean insertData(){
             Name.setText("");
-            Qualifications.setText("");
+            Qualification.setText("");
             Type.setText("");
             Timing.setText("");
-            DepartmentRabbits staf = new DepartmentRabbits();
-            staf.tableDetails();
-           
-            
-        
-        }catch(SQLException ex){
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null,ex);
-        }
-        }else{
-            System.out.println("The connection not available");
-        }
-        
+        return false;
     }
 }

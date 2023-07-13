@@ -1,16 +1,9 @@
 
 package view;
-import java.sql.*;
-import database.DbConnection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-
-
-/**
- *
- * @author Karun Dixit
- */
+import model.DogsModel;
+import controller.DogsController;
 public class DepartmentDogs extends javax.swing.JFrame {
     
     /**
@@ -18,8 +11,17 @@ public class DepartmentDogs extends javax.swing.JFrame {
      */
     public DepartmentDogs() {
         initComponents();
-        tableDetails();
-    }
+        DogsController rcontrol=new DogsController(getValueTable(),this);
+        if(!rcontrol.allDogs()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        }
+    public DogsModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) dogsTable.getModel();
+        DogsModel obj=new DogsModel(tableName);
+        return obj;
+        }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,14 +39,13 @@ public class DepartmentDogs extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btn_dogs = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         dogsTable = new javax.swing.JTable();
         bookappointment = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(887, 453));
 
         jPanel2.setBackground(new java.awt.Color(255, 220, 102));
 
@@ -82,7 +83,7 @@ public class DepartmentDogs extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel2.setText("DOCTORS");
+        jLabel2.setText("DOGS");
 
         btn_dogs.setBackground(new java.awt.Color(102, 102, 255));
         btn_dogs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/add1.png"))); // NOI18N
@@ -92,11 +93,11 @@ public class DepartmentDogs extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/refresh.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRefresh.setBackground(new java.awt.Color(102, 102, 255));
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/refresh.png"))); // NOI18N
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -115,10 +116,10 @@ public class DepartmentDogs extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(190, 190, 190)
+                .addGap(146, 146, 146)
                 .addComponent(btn_dogs)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -131,7 +132,7 @@ public class DepartmentDogs extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(btn_dogs)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(23, 23, 23))
         );
@@ -213,10 +214,13 @@ public class DepartmentDogs extends javax.swing.JFrame {
         Dogs.show();
     }//GEN-LAST:event_btn_dogsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        tableDetails();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        DogsController rcontrol=new DogsController(getValueTable(),this);
+        if(!rcontrol.allDogs()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      setVisible(false);
@@ -267,32 +271,13 @@ public class DepartmentDogs extends javax.swing.JFrame {
         });
     }
     
-    public void tableDetails()
-    {
-        DefaultTableModel dtm=(DefaultTableModel) dogsTable.getModel();
-        dtm.setRowCount(0);
-        
-        try
-        {
-            Connection con=DbConnection.connectDB();
-                    Statement st=con.createStatement();
-                    ResultSet rs=st.executeQuery("select * from Dogs");
-                    while (rs.next())
-                    {
-                        dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
-                    }
-        }
-        catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(rootPane, e.getMessage());
-                }
-    }
+    
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookappointment;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btn_dogs;
     private javax.swing.JTable dogsTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

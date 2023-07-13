@@ -86,7 +86,7 @@
                       <Component id="Name" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                       <Component id="Timing" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                       <Component id="Type" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
-                      <Component id="Qualifications" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="Qualification" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="244" max="32767" attributes="0"/>
               </Group>
@@ -109,7 +109,7 @@
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Qualifications" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Qualification" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -187,7 +187,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="Name">
         </Component>
-        <Component class="javax.swing.JTextField" name="Qualifications">
+        <Component class="javax.swing.JTextField" name="Qualification">
         </Component>
         <Component class="javax.swing.JTextField" name="Type">
         </Component>

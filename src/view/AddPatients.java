@@ -12,6 +12,13 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import model.AddPatientsModel;
+import static model.AddPatientsModel.agevalidation;
+import static model.AddPatientsModel.contactvalidation;
+import static model.AddPatientsModel.dobvalidation;
+import static model.AddPatientsModel.fieldvalidation;
+import static model.AddPatientsModel.namevalidation;
+import static model.AddPatientsModel.ownervalidation;
+
 public class AddPatients extends javax.swing.JFrame {
 
     /**
@@ -306,11 +313,38 @@ public class AddPatients extends javax.swing.JFrame {
         String field = fetxt.getText();
         String owner= Oname.getText();
         String contact = contxt.getText();
-        return true;
+        if (!(namevalidation(name)|| agevalidation(age) || dobvalidation(dob) || fieldvalidation(field) ||  ownervalidation(owner) || contactvalidation(contact))) {
+            JOptionPane.showMessageDialog(this, "One or more fields empty");
+            return false;
+        }
+        if (!namevalidation(name)) {
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            return false;
+        }
+        if (!agevalidation(age)) {
+            JOptionPane.showMessageDialog(this, "Phone number should be of 10 digits");
+            return false;
+        }
+        if (!dobvalidation(dob)) {
+            JOptionPane.showMessageDialog(this, "Please enter category");
+            return false;
+        }
+        if (!fieldvalidation(field)) {
+            JOptionPane.showMessageDialog(this, "Please enter field");
+            return false;
+        }
+        if (!ownervalidation(owner)) {
+            JOptionPane.showMessageDialog(this, "Phone enter shift");
+            return false;
+        }
+        if (!contactvalidation(contact)) {
+            JOptionPane.showMessageDialog(this, "Please enter field");
+            return false;
+        }
+        return false;
     }
     
-    public boolean insertData(){
-            JOptionPane.showMessageDialog(this, "User data inserted", "Success", JOptionPane.INFORMATION_MESSAGE);
+    public boolean insertData(){           
             Pname.setText("");
             Agetxt.setText("");
             DOBtxt.setText("");
@@ -339,4 +373,8 @@ public class AddPatients extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private boolean namevalidation(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

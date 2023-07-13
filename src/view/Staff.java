@@ -292,23 +292,7 @@ public class Staff extends javax.swing.JFrame {
             }
         });
     }
-    
-//    public void tableDetails(){
-//        DefaultTableModel dtm = (DefaultTableModel) staffTable.getModel();
-//        dtm.setRowCount(0);
-//      Statement st=null;
-//      ResultSet rs=null;
-//    try{
-//        Connection dbconn = (Connection) DbConnection.connectDB();
-//        st=(Statement)dbconn.createStatement();
-//        rs = st.executeQuery("select * from staffs");
-//        while(rs.next()){
-//            dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-//        }
-//    }catch(SQLException e){
-//        JOptionPane.showMessageDialog(rootPane, e);
-//    }
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

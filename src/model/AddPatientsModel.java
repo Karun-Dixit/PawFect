@@ -73,4 +73,51 @@ public class AddPatientsModel {
         this.contact = contact;
     }
     
+    public static boolean namevalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean agevalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean dobvalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean fieldvalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean ownervalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean contactvalidation(String var){
+        if (var.equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
