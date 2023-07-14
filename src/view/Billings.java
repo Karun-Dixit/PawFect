@@ -2,12 +2,7 @@ package view;
 import controller.BillingsController;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import static model.BillingsModel.*;
 import model.BillingsModel;
 
@@ -293,27 +288,12 @@ public class Billings extends javax.swing.JFrame {
         area.setText(area.getText()+"Database: "+patientID.getText()+"\n");
         area.setText(area.getText()+"Patient ID: "+patientID.getText()+"\n"+"\n");
         area.setText(area.getText()+"Patient Name: "+ptntxt.getText()+"\n"+"\n");
-        try{
-             String dId = patientID.getText();
-              Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
-              Statement st = con.createStatement();
-
-             
-              
-              if(dId.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-              ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
-            if(rs.next()){
-                area.setText(area.getText()+"Owner name: "+rs.getString(6)+"\n"+"\n");
-                area.setText(area.getText()+"D.O.B: "+rs.getString(4)+"\n");
+        BillingsController econtrol = new BillingsController(getuser(),this);
+            if(econtrol.searchBillings()){
+                area.setText(area.getText()+"Owner name: "+getTotalCost()+"\n"+"\n");
+                area.setText(area.getText()+"D.O.B: "+getMedID()+"\n");
             }
-              }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }    
-        
+         
         
 //        area.setText(area.getText()+"Owner name: "+IDsearch.getText()+"\n");
         area.setText(area.getText()+"---------------------------------------------"+"\n");
@@ -335,33 +315,6 @@ public class Billings extends javax.swing.JFrame {
             apfee.setText(getAmFee());
             rpfee.setText(getRpFee());
         }
-
-//        String dId = IDsearch.getText();
-//        try{
-//              Class.forName("com.mysql.cj.jdbc.Driver");
-//              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
-//              Statement st = con.createStatement();
-//
-//             
-//              
-//              if(dId.isEmpty()){
-//                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-//              }else{
-//              ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
-//             
-//            if(rs.next()){
-//                ptntxt.setText(rs.getString(2));
-//                apfee.setText(rs.getString(8));
-//                
-//                rpfee.setText(rs.getString(9));
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-//            }
-//              }
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null,e);
-//        }        // TODO add your handling code here:        // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
@@ -384,30 +337,10 @@ public class Billings extends javax.swing.JFrame {
     }//GEN-LAST:event_printbtnActionPerformed
 
     private void btnRevealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevealActionPerformed
-          String dId = patientID.getText();
-        String mId = medID.getText();
-        try{
-              Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
-              Statement st = con.createStatement();
-
-             
-              
-              if(mId.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-                  ResultSet rss = st.executeQuery("select * from meds where PatientID ='"+dId+"' and MedID = '"+mId+"'");
-             
-            if(rss.next()){
-                tmfee.setText(rss.getString(6));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }  
+        BillingsController econtrol = new BillingsController(getuser(),this);
+        if(econtrol.searchMeds()){
+            tmfee.setText(getTotalCost());
+        }
     }//GEN-LAST:event_btnRevealActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

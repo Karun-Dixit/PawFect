@@ -29,7 +29,28 @@ public class daoBillings {
             Statement st=(Statement)dbconn.createStatement();
             ResultSet rs = st.executeQuery("select * from patients where PatientID='"+dID+"'");
             if(rs.next()){
-                BillingsModel edstaf=new BillingsModel(dID,rs.getString(3),rs.getString(2),rs.getString(8),rs.getString(9),rs.getString(6));
+                BillingsModel edstaf=new BillingsModel(dID,rs.getString(4),rs.getString(2),rs.getString(8),rs.getString(9),rs.getString(6));
+                return true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return false;
+    }
+    
+    public boolean searchMeds(){
+        String dID=smodel.getPatientID();
+        String mID=smodel.getMedID();
+        try{
+            Connection dbconn = (Connection) DbConnection.connectDB();
+            Statement st=(Statement)dbconn.createStatement();
+            ResultSet rs = st.executeQuery("select * from meds where PatientID ='"+dID+"' and MedID = '"+mID+"'");
+            if(rs.next()){
+                BillingsModel edstaf=new BillingsModel(dID,rs.getString(1),rs.getString(1),rs.getString(1),rs.getString(1),rs.getString(6));
                 return true;
             }
             else{

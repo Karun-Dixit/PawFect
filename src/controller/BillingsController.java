@@ -29,4 +29,8 @@ public class BillingsController {
         return o.searchBillings();
     }
     
+    public boolean searchMeds(){
+        daoBillings o=new daoBillings(smodel);
+        return o.searchMeds();
+    }
 }
