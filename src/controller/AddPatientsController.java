@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-
 import daofile.daoPatients;
 import model.AddPatientsModel;
 import view.AddPatients;
@@ -19,11 +18,9 @@ public class AddPatientsController {
         this.smodel = smodel;
         this.view = view;
     }
-    public AddPatientsController(AddPatients view){
-        this.view = view;
-    }
     public void addPatients(){
         if(view.isvalid()){
+            System.out.println("HyyyController");
             daoPatients.saveToPatients(
             smodel.getName(),
             smodel.getAge(),

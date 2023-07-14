@@ -17,6 +17,7 @@ public class AddPatientsModel {
     private String contact;
 
     public AddPatientsModel(String name, String age, String dob, String field, String owner, String contact) {
+        System.out.println("HyyyGOD");
         this.name = name;
         this.age = age;
         this.dob = dob;
@@ -27,6 +28,7 @@ public class AddPatientsModel {
 
     public String getName() {
         return name;
+        
     }
 
     public void setName(String name) {
