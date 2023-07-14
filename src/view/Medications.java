@@ -1,10 +1,8 @@
 package view;
+import controller.MedicationsController;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
+import model.MedicationsModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -328,24 +326,8 @@ public class Medications extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
-             try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
-        Statement st = con.createStatement();
-        
-         
-        boolean b = st.execute("INSERT INTO meds (PatientID, Med1, Med2, Med3, tmfees) VALUES ('"+paID.getText()+"','"+me1.getText()+"','"+me2.getText()+"','"+me3.getText()+"','"+toco.getText()+"')");
-        
-        if(!b){
-            JOptionPane.showMessageDialog(this, "The prescribed meds are saved!!");
-            
-        }else{
-            JOptionPane.showMessageDialog(this,"ERROR! Try Again");
-        }
-//        clear();
-        }catch (Exception e){
-            e.printStackTrace();
-        }        // TODO add your handling code here:
+        MedicationsController scontrol = new MedicationsController(getuser(),this);
+        scontrol.Medications();
     }//GEN-LAST:event_savebtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -356,6 +338,16 @@ public class Medications extends javax.swing.JFrame {
         s.setVisible(true);           // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public MedicationsModel getuser(){
+    MedicationsModel dogsss = new MedicationsModel(
+        paID.getText(),
+        me1.getText(),
+        me2.getText(),
+        me3.getText(),
+        toco.getText()
+    );
+    return dogsss;
+}
     /**
      * @param args the command line arguments
      */
