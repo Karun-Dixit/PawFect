@@ -1,4 +1,5 @@
 package view;
+import controller.BillingsController;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -7,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static model.BillingsModel.*;
+import model.BillingsModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -49,20 +52,20 @@ public class Billings extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        IDsearch = new javax.swing.JTextField();
+        patientID = new javax.swing.JTextField();
         apfee = new javax.swing.JTextField();
         tmfee = new javax.swing.JTextField();
         rpfee = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         area = new javax.swing.JTextArea();
-        IDbtn = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         ptntxt = new javax.swing.JTextField();
         resetbtn = new javax.swing.JButton();
         printbtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        IDsearch1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        medID = new javax.swing.JTextField();
+        btnReveal = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -105,11 +108,11 @@ public class Billings extends javax.swing.JFrame {
         area.setAutoscrolls(false);
         jScrollPane1.setViewportView(area);
 
-        IDbtn.setBackground(new java.awt.Color(114, 164, 241));
-        IDbtn.setText("Search");
-        IDbtn.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setBackground(new java.awt.Color(114, 164, 241));
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDbtnActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -134,11 +137,11 @@ public class Billings extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel7.setText("Med ID:");
 
-        jButton2.setBackground(new java.awt.Color(114, 164, 241));
-        jButton2.setText("reveal");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnReveal.setBackground(new java.awt.Color(114, 164, 241));
+        btnReveal.setText("reveal");
+        btnReveal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRevealActionPerformed(evt);
             }
         });
 
@@ -173,9 +176,9 @@ public class Billings extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(IDsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(IDbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addGap(11, 11, 11)
@@ -202,9 +205,9 @@ public class Billings extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(10, 10, 10)
-                                .addComponent(IDsearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(medID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnReveal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addContainerGap())
@@ -221,8 +224,8 @@ public class Billings extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(IDsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IDbtn))
+                            .addComponent(patientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -238,8 +241,8 @@ public class Billings extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(IDsearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(medID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReveal))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -287,11 +290,11 @@ public class Billings extends javax.swing.JFrame {
         int fee3 = Integer.valueOf(rpfee.getText());
         int ap = fee1 + fee2 + fee3;
         area.setText(area.getText()+"\n"+date+"\n");
-        area.setText(area.getText()+"Database: "+IDsearch.getText()+"\n");
-        area.setText(area.getText()+"Patient ID: "+IDsearch.getText()+"\n"+"\n");
+        area.setText(area.getText()+"Database: "+patientID.getText()+"\n");
+        area.setText(area.getText()+"Patient ID: "+patientID.getText()+"\n"+"\n");
         area.setText(area.getText()+"Patient Name: "+ptntxt.getText()+"\n"+"\n");
         try{
-             String dId = IDsearch.getText();
+             String dId = patientID.getText();
               Class.forName("com.mysql.cj.jdbc.Driver");
               Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
               Statement st = con.createStatement();
@@ -324,34 +327,42 @@ public class Billings extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void IDbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDbtnActionPerformed
-        String dId = IDsearch.getText();
-        try{
-              Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
-              Statement st = con.createStatement();
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        BillingsController econtrol = new BillingsController(getuser(),this);
+        if(econtrol.searchBillings()){
+            ptntxt.setText(getPatientName());
+            
+            apfee.setText(getAmFee());
+            rpfee.setText(getRpFee());
+        }
 
-             
-              
-              if(dId.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-              ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
-             
-            if(rs.next()){
-                ptntxt.setText(rs.getString(2));
-                apfee.setText(rs.getString(8));
-                
-                rpfee.setText(rs.getString(9));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }        // TODO add your handling code here:        // TODO add your handling code here:
-    }//GEN-LAST:event_IDbtnActionPerformed
+//        String dId = IDsearch.getText();
+//        try{
+//              Class.forName("com.mysql.cj.jdbc.Driver");
+//              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
+//              Statement st = con.createStatement();
+//
+//             
+//              
+//              if(dId.isEmpty()){
+//                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
+//              }else{
+//              ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
+//             
+//            if(rs.next()){
+//                ptntxt.setText(rs.getString(2));
+//                apfee.setText(rs.getString(8));
+//                
+//                rpfee.setText(rs.getString(9));
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
+//            }
+//              }
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null,e);
+//        }        // TODO add your handling code here:        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
             area.setText(""); 
@@ -359,8 +370,8 @@ public class Billings extends javax.swing.JFrame {
             apfee.setText(""); 
             tmfee.setText(""); 
             rpfee.setText(""); 
-            IDsearch.setText("");
-            IDsearch1.setText("");// TODO add your handling code here:
+            patientID.setText("");
+            medID.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_resetbtnActionPerformed
 
     private void printbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printbtnActionPerformed
@@ -372,9 +383,9 @@ public class Billings extends javax.swing.JFrame {
         }// TODO add your handling code here:
     }//GEN-LAST:event_printbtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          String dId = IDsearch.getText();
-        String mId = IDsearch1.getText();
+    private void btnRevealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevealActionPerformed
+          String dId = patientID.getText();
+        String mId = medID.getText();
         try{
               Class.forName("com.mysql.cj.jdbc.Driver");
               Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
@@ -397,7 +408,7 @@ public class Billings extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }  
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRevealActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         setVisible(true);
@@ -441,15 +452,25 @@ public class Billings extends javax.swing.JFrame {
             }
         });
     }
+    
+     public BillingsModel getuser(){
+    BillingsModel stafff = new BillingsModel(
+       patientID.getText(),     
+      medID.getText(),
+     ptntxt.getText(),
+    apfee.getText(),
+   rpfee.getText(),
+     tmfee.getText()
+    );
+    return stafff;
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton IDbtn;
-    private javax.swing.JTextField IDsearch;
-    private javax.swing.JTextField IDsearch1;
     private javax.swing.JTextField apfee;
     private javax.swing.JTextArea area;
+    private javax.swing.JButton btnReveal;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -460,6 +481,8 @@ public class Billings extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField medID;
+    private javax.swing.JTextField patientID;
     private javax.swing.JButton printbtn;
     private javax.swing.JTextField ptntxt;
     private javax.swing.JButton resetbtn;

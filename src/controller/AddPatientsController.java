@@ -20,7 +20,6 @@ public class AddPatientsController {
     }
     public void addPatients(){
         if(view.isvalid()){
-            System.out.println("HyyyController");
             daoPatients.saveToPatients(
             smodel.getName(),
             smodel.getAge(),

@@ -37,16 +37,13 @@ public class daoPatients {
         try(Connection dbconn = (Connection) DbConnection.connectDB()){
             PreparedStatement st = (PreparedStatement)
             dbconn.prepareStatement("Insert into patients(PatientName,Age,DOB,Field,OwnerName,Contact) values(?,?,?,?,?,?)");
-            System.out.println("Hyyyy");
             st.setString(1,name);
             st.setString(2,age);
             st.setString(3,dob);
             st.setString(4,field);
             st.setString(5,owner);
             st.setString(6,contact);
-            System.out.println("Hyyyy2");
             int res = st.executeUpdate();
-            System.out.println("Hyyy3");
             JOptionPane.showMessageDialog(null, "User data inserted", "Success", JOptionPane.INFORMATION_MESSAGE);
             st.close();
             dbconn.close();
