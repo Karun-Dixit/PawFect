@@ -1,14 +1,10 @@
 package view;
+import controller.PatientsController;
 import java.awt.Toolkit;
-//import java.awt.event.WindowEvent;
 import java.awt.event.*;
-
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.PatientsModel;
 
 
 /*
@@ -31,7 +27,17 @@ public class Patients extends javax.swing.JFrame {
     }
     public Patients() {
         initComponents();
-    }
+        PatientsController rcontrol=new PatientsController(getValueTable(),this);
+        if(!rcontrol.allPatients()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+//        tableDetails();
+        }
+    public PatientsModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) patientsTable.getModel();
+        PatientsModel obj=new PatientsModel(tableName);
+        return obj;
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,12 +55,12 @@ public class Patients extends javax.swing.JFrame {
         panel3 = new java.awt.Panel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        patientsTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -109,8 +115,8 @@ public class Patients extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        patientsTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        patientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -129,13 +135,13 @@ public class Patients extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setEnabled(false);
-        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable1.setRowHeight(18);
-        jTable1.setRowMargin(3);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        patientsTable.setEnabled(false);
+        patientsTable.setGridColor(new java.awt.Color(0, 0, 0));
+        patientsTable.setRowHeight(18);
+        patientsTable.setRowMargin(3);
+        patientsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        patientsTable.setShowGrid(true);
+        jScrollPane1.setViewportView(patientsTable);
 
         jButton2.setBackground(new java.awt.Color(114, 164, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,11 +181,11 @@ public class Patients extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/refresh.png"))); // NOI18N
-        jButton6.setContentAreaFilled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/refresh.png"))); // NOI18N
+        btnRefresh.setContentAreaFilled(false);
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -198,7 +204,7 @@ public class Patients extends javax.swing.JFrame {
                         .addGap(98, 98, 98)
                         .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                        .addComponent(jButton6)
+                        .addComponent(btnRefresh)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,7 +226,7 @@ public class Patients extends javax.swing.JFrame {
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton4)
                                 .addGroup(panel2Layout.createSequentialGroup()
@@ -272,62 +278,15 @@ public class Patients extends javax.swing.JFrame {
                 // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Patients.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-            Connection con = null;
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916"); // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(Patients.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-            Statement st = null;
-        try {
-            st = con.createStatement();
-        } catch (SQLException ex) {
-            Logger.getLogger(Patients.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
-            String sql = "select * from patients";
-            
-            ResultSet rs = null;
-            DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-            tblModel.setRowCount(0);
-        try {
-            rs = st.executeQuery(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(Patients.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        try {
-            while(rs.next()){
-                String PatientID = rs.getString("PatientID");
-                String PatientName = rs.getString("PatientName");
-                String Age = String.valueOf(rs.getInt("Age"));
-                String DOB = String.valueOf(rs.getInt("DOB"));
-                String Field = rs.getString("Field");
-                String OwnerName = rs.getString("OwnerName");
-                String Contact = String.valueOf(rs.getInt("Contact"));
-                
-                String tbData[]= {PatientID,PatientName,Age,DOB,Field,OwnerName,Contact};
-//                DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-//                tblModel.setRowCount(0);
-                tblModel.addRow(tbData);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Patients.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                   
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        PatientsController rcontrol=new PatientsController(getValueTable(),this);
+        if(!rcontrol.allPatients()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }    
            
            
         
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         setVisible(true);
@@ -382,18 +341,18 @@ public class Patients extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private java.awt.Panel panel2;
     private java.awt.Panel panel3;
+    private javax.swing.JTable patientsTable;
     // End of variables declaration//GEN-END:variables
 }

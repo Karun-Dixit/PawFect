@@ -36,11 +36,11 @@ public class EditPatientsModel {
         EditPatientsModel.dID = dID;
     }
 
-    public static String getName() {
+    public static String getNameP() {
         return name;
     }
 
-    public static void setName(String name) {
+    public static void setNameP(String name) {
         EditPatientsModel.name = name;
     }
 
@@ -68,11 +68,11 @@ public class EditPatientsModel {
         EditPatientsModel.field = field;
     }
 
-    public static String getOwner() {
+    public static String getOwnerP() {
         return owner;
     }
 
-    public static void setOwner(String owner) {
+    public static void setOwnerP(String owner) {
         EditPatientsModel.owner = owner;
     }
 

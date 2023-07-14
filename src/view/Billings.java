@@ -66,31 +66,26 @@ public class Billings extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(170, 190, 215));
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("BILLINGS");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Patient Name:");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Patient ID:");
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Appointment Fee:");
 
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Total Medication Fees:");
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Report Fees:");
 
         jButton1.setBackground(new java.awt.Color(114, 164, 241));
@@ -137,7 +132,6 @@ public class Billings extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Med ID:");
 
         jButton2.setBackground(new java.awt.Color(114, 164, 241));
@@ -148,7 +142,7 @@ public class Billings extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\User 1\\Downloads\\PawFect\\src\\photo\\relr.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/close1.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +271,7 @@ public class Billings extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -298,7 +293,7 @@ public class Billings extends javax.swing.JFrame {
         try{
              String dId = IDsearch.getText();
               Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
+              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
               Statement st = con.createStatement();
 
              
@@ -310,12 +305,6 @@ public class Billings extends javax.swing.JFrame {
             if(rs.next()){
                 area.setText(area.getText()+"Owner name: "+rs.getString(6)+"\n"+"\n");
                 area.setText(area.getText()+"D.O.B: "+rs.getString(4)+"\n");
-//                ptntxt.setText(rs.getString(2));
-//                apfee.setText(rs.getString(8));
-//                tmfee.setText(rs.getString(9));
-//                rpfee.setText(rs.getString(10));
-//                OnameE.setText(rs.getString(6));
-//                contxtE.setText(rs.getString(7));
             }
               }
         }catch(Exception e){
@@ -337,10 +326,9 @@ public class Billings extends javax.swing.JFrame {
 
     private void IDbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDbtnActionPerformed
         String dId = IDsearch.getText();
-//        String mId = IDsearch1.getText();
         try{
               Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
+              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
               Statement st = con.createStatement();
 
              
@@ -348,17 +336,13 @@ public class Billings extends javax.swing.JFrame {
               if(dId.isEmpty()){
                     JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
               }else{
-//                  ResultSet rss = st.executeQuery( "select * from (select * from meds where PatientID ='"+dId+"') where MedID = '"+mId+"'");
               ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
              
             if(rs.next()){
-//                tmfee.setText(rss.getString(6));
                 ptntxt.setText(rs.getString(2));
                 apfee.setText(rs.getString(8));
                 
                 rpfee.setText(rs.getString(9));
-//                OnameE.setText(rs.getString(6));
-//                contxtE.setText(rs.getString(7));
             }
             else{
                 JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
@@ -393,7 +377,7 @@ public class Billings extends javax.swing.JFrame {
         String mId = IDsearch1.getText();
         try{
               Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
+              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawfect","root","kiyo1209");
               Statement st = con.createStatement();
 
              
@@ -402,16 +386,9 @@ public class Billings extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
               }else{
                   ResultSet rss = st.executeQuery("select * from meds where PatientID ='"+dId+"' and MedID = '"+mId+"'");
-//              ResultSet rs = st.executeQuery("select * from Patients where PatientID ='"+dId+"'");
              
             if(rss.next()){
                 tmfee.setText(rss.getString(6));
-//                ptntxt.setText(rs.getString(2));
-//                apfee.setText(rs.getString(8));
-//                
-//                rpfee.setText(rs.getString(10));
-//                OnameE.setText(rs.getString(6));
-//                contxtE.setText(rs.getString(7));
             }
             else{
                 JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
@@ -419,8 +396,7 @@ public class Billings extends javax.swing.JFrame {
               }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
-        }        // TODO add your handling code here:        // TODO add your handling code here:
-             // TODO add your handling code here:
+        }  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

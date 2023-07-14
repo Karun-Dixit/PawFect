@@ -22,7 +22,7 @@ public class AddPatientsController {
     public AddPatientsController(AddPatients view){
         this.view = view;
     }
-    public void addPatient(){
+    public void addPatients(){
         if(view.isvalid()){
             daoPatients.saveToPatients(
             smodel.getName(),
@@ -33,7 +33,7 @@ public class AddPatientsController {
             smodel.getContact()
             );
             view.insertData();
-            
         }
+        
     }
 }

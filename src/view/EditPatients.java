@@ -1,11 +1,10 @@
 package view;
+import controller.EditPatientsController;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
+import static model.EditPatientsModel.*;
+import model.EditPatientsModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -50,14 +49,15 @@ public class EditPatients extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        IDsearch = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        dID = new javax.swing.JTextField();
         IDSearchbtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         bckbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(170, 190, 215));
@@ -109,24 +109,25 @@ public class EditPatients extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel7.setText("Contact:");
 
-        jButton1.setBackground(new java.awt.Color(114, 164, 241));
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton1.setText("Update");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setBackground(new java.awt.Color(114, 164, 241));
+        btnUpdate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(114, 164, 241));
-        jButton3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(114, 164, 241));
+        btnDelete.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
+        IDSearchbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/search1.png"))); // NOI18N
         IDSearchbtn.setBorderPainted(false);
         IDSearchbtn.setContentAreaFilled(false);
         IDSearchbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +139,7 @@ public class EditPatients extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel8.setText("Patient ID");
 
+        bckbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/close2.png"))); // NOI18N
         bckbtn.setBorderPainted(false);
         bckbtn.setContentAreaFilled(false);
         bckbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -153,16 +155,16 @@ public class EditPatients extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(37, 37, 37)
                         .addComponent(bckbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195)
+                        .addGap(196, 196, 196)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(IDsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(IDSearchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(IDSearchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(265, 265, 265)
@@ -195,77 +197,73 @@ public class EditPatients extends javax.swing.JFrame {
                                             .addGap(0, 0, Short.MAX_VALUE)))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(260, 260, 260)
-                        .addComponent(jButton1)
+                        .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bckbtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(IDsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bckbtn))
-                                .addGap(12, 12, 12))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(IDSearchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(PnameE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(AgetxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(DOBtxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fetxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OnameE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(contxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addContainerGap(117, Short.MAX_VALUE))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
+                            .addComponent(IDSearchbtn))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(PnameE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(AgetxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(DOBtxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fetxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(OnameE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(contxtE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnDelete))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fetxtEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetxtEActionPerformed
@@ -286,104 +284,48 @@ public class EditPatients extends javax.swing.JFrame {
     Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
-        Statement st = con.createStatement();
-        String IDD= IDsearch.getText();
-          ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+IDD+"'");
-                 if(IDD.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-            if(rs.next()){
-                boolean b = st.execute("UPDATE patients SET PatientName= '"+PnameE.getText()+"', Age= '"+AgetxtE.getText()+"', DOB= '"+DOBtxtE.getText()+"', Field ='"+fetxtE.getText()+"', OwnerName= '"+OnameE.getText()+"', Contact= '"+contxtE.getText()+"' WHERE PatientID='"+IDsearch.getText()+"'"); 
-            if(!b){
-            JOptionPane.showMessageDialog(this, "Updated!");
-            }else{
-            JOptionPane.showMessageDialog(this,"ERROR! Try Again");
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        EditPatientsController econtrol = new EditPatientsController(getuser(),this);
+        if(econtrol.uptPatients()){
+            dID.setText("");
+            PnameE.setText("");
+            AgetxtE.setText("");
+            DOBtxtE.setText("");
+            fetxtE.setText("");
+            OnameE.setText("");
+            contxtE.setText("");
+        }
+            // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int s=JOptionPane.showConfirmDialog(null,"Are sure to delete?","Select",JOptionPane.YES_NO_OPTION);
+        if(s==0){
+            EditPatientsController econtrol = new EditPatientsController(getuser(),this);
+            if(econtrol.delPatients()){
+                dID.setText("");
+                PnameE.setText("");
+                AgetxtE.setText("");
+                DOBtxtE.setText("");
+                fetxtE.setText("");
+                OnameE.setText("");
+            contxtE.setText("");
             }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-                 clear();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
         }
 
-//        if(IDD.isEmpty()){
-//          JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-//        }else{
-//        boolean b = st.execute("UPDATE Patients SET PatientName= '"+PnameE.getText()+"', Age= '"+AgetxtE.getText()+"', DOB= '"+DOBtxtE.getText()+"', Field ='"+fetxtE.getText()+"', OwnerName= '"+OnameE.getText()+"', Contact= '"+contxtE.getText()+"' WHERE PatientID='"+IDsearch.getText()+"'");
-//        if(!b){
-//            JOptionPane.showMessageDialog(this, "Updated!");
-//        }else{
-//            JOptionPane.showMessageDialog(this,"ERROR! Try Again");
-//        }
-//        }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }              // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-                  try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
-        Statement st = con.createStatement();
-        String IID= IDsearch.getText();
-        ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+IID+"'");
-                 if(IID.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-            if(rs.next()){
-                boolean b = st.execute("DELETE FROM patients WHERE PatientID ="+IID+""); 
-            if(!b){
-            JOptionPane.showMessageDialog(this, "Deleted");
-            }else{
-            JOptionPane.showMessageDialog(this,"ERROR! Try Again");
-            }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-            clear();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void IDSearchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDSearchbtnActionPerformed
-       String dId=IDsearch.getText();
-        try{
-              Class.forName("com.mysql.cj.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pawwfect","root","A@brity0916");
-              Statement st = con.createStatement();
-
-              
-              if(dId.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-              ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+dId+"'");
-            if(rs.next()){
-                PnameE.setText(rs.getString(2));
-                AgetxtE.setText(rs.getString(3));
-                DOBtxtE.setText(rs.getString(4));
-                fetxtE.setText(rs.getString(5));
-                OnameE.setText(rs.getString(6));
-                contxtE.setText(rs.getString(7));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }        // TODO add your handling code here:
+       EditPatientsController econtrol = new EditPatientsController(getuser(),this);
+        if(econtrol.searchPatients()){
+            
+            PnameE.setText(getNameP());
+            AgetxtE.setText(getAge());
+            DOBtxtE.setText(getDob());
+            fetxtE.setText(getField());
+            OnameE.setText(getOwnerP());
+            contxtE.setText(getContact());
+        } // TODO add your handling code here:
     }//GEN-LAST:event_IDSearchbtnActionPerformed
 
     private void bckbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckbtnActionPerformed
@@ -394,6 +336,18 @@ public class EditPatients extends javax.swing.JFrame {
         s.setVisible(true);          // TODO add your handling code here:
     }//GEN-LAST:event_bckbtnActionPerformed
 
+    public EditPatientsModel getuser(){
+    EditPatientsModel Patientsss = new EditPatientsModel(
+       dID.getText(),     
+      PnameE.getText(),
+     AgetxtE.getText(),
+    DOBtxtE.getText(),
+   fetxtE.getText(),
+      OnameE.getText(),
+     contxtE.getText()
+    );
+    return Patientsss;
+    }  
     /**
      * @param args the command line arguments
      */
@@ -435,14 +389,14 @@ public class EditPatients extends javax.swing.JFrame {
     private javax.swing.JTextField AgetxtE;
     private javax.swing.JTextField DOBtxtE;
     private javax.swing.JButton IDSearchbtn;
-    private javax.swing.JTextField IDsearch;
     private javax.swing.JTextField OnameE;
     private javax.swing.JTextField PnameE;
     private javax.swing.JButton bckbtn;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField contxtE;
+    private javax.swing.JTextField dID;
     private javax.swing.JTextField fetxtE;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
