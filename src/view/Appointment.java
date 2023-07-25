@@ -1,12 +1,10 @@
 package view;
-import controller.PatientsController;
 import database.DbConnection;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.PatientsModel;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -224,7 +222,7 @@ public class Appointment extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btn_dogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dogsActionPerformed
-        AddAppointments Birds=new AddAppointments();
+        AddAppointment Birds=new AddAppointment();
         Birds.show();
     }//GEN-LAST:event_btn_dogsActionPerformed
 

@@ -4,24 +4,21 @@
  */
 package view;
 
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import controller.AddAppointmentController;
 import javax.swing.JOptionPane;
+import model.AddAppointmentModel;
+import static model.AddAppointmentModel.*;
 
 /**
  *
  * @author Karun Dixit
  */
-public class AddAppointments extends javax.swing.JFrame {
+public class AddAppointment extends javax.swing.JFrame {
 
     /**
      * Creates new form AddAppointments
      */
-    public AddAppointments() {
+    public AddAppointment() {
         initComponents();
     }
 
@@ -49,6 +46,7 @@ public class AddAppointments extends javax.swing.JFrame {
         PatientName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(170, 190, 215));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -161,22 +159,12 @@ public class AddAppointments extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-     String name = DoctorName.getText();
-        String field= Field.getText();
-        String ph=Time.getText();
-        String exp = RoomNo.getText();
-        String exp1 = PatientName.getText();
-        Connection dbconnec = (Connection) DbConnection.connectDB();
-        PreparedStatement pt = null;
-        if(name.isEmpty() || field.isEmpty() || ph.isEmpty() || exp.isEmpty() || exp1.isEmpty()){
-            JOptionPane.showMessageDialog(this,"One or more field empty!","Error",JOptionPane.ERROR_MESSAGE);
-        }else{
-            AddAppointments(name,field,ph,exp,exp1);
-
-        }
+     AddAppointmentController scontrol = new AddAppointmentController(getuser(),this);
+        scontrol.addAppointment();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -201,20 +189,21 @@ public class AddAppointments extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddAppointments().setVisible(true);
+                new AddAppointment().setVisible(true);
             }
         });
     }
@@ -234,36 +223,55 @@ public class AddAppointments extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-private void AddAppointments(String name, String field, String ph, String exp, String exp1) {
-        Connection dbconn = (Connection) DbConnection.connectDB();
-        if(dbconn != null){
-        try{
-            PreparedStatement st = (PreparedStatement)
-                    dbconn.prepareStatement("Insert into appointment(DOCTOR_NAME,FIELD,TIME,ROOM_NO,PATIENT_NAME) values(?,?,?,?,?)");
-            st.setString(1,name);
-            st.setString(2,field);
-            st.setString(3,ph);
-            st.setString(4,exp);
-            st.setString(5,exp1);
-            int res = st.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data inserted", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
+public AddAppointmentModel getuser(){
+    AddAppointmentModel apppp = new AddAppointmentModel(
+        DoctorName.getText(),
+        Field.getText(),
+        Time.getText(),
+        RoomNo.getText(),
+            PatientName.getText()
+    );
+    return apppp;
+}
+public boolean isvalid() {
+        String dname = DoctorName.getText();
+        String field= Field.getText();
+        String time=Time.getText();
+        String room = RoomNo.getText();
+        String pname= PatientName.getText();
+        if (!(doctornamevalidation(dname) || fieldvalidation(field) || timevalidation(time)|| roomvalidation(room)|| patientnamevalidation(pname))) {
+           JOptionPane.showMessageDialog(this, "One or more fields empty");
+            return false;
+        }
+        if (!doctornamevalidation(dname)) {
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            return false;
+        }
+        if (!fieldvalidation(field)) {
+            JOptionPane.showMessageDialog(this, "Please enter Qualification");
+            return false;
+        }
+        if (!timevalidation(time)) {
+            JOptionPane.showMessageDialog(this, "Please enter type");
+            return false;
+        }
+        if (!roomvalidation(room)) {
+            JOptionPane.showMessageDialog(this, "Please enter timing");
+            return false;
+        }
+        if (!patientnamevalidation(pname)) {
+            JOptionPane.showMessageDialog(this, "Please enter timing");
+            return false;
+        }
+        
+        return true;
+}
+public boolean insertData(){
             DoctorName.setText("");
             Field.setText("");
             Time.setText("");
             RoomNo.setText("");
             PatientName.setText("");
-            Appointment staf = new Appointment();
-            staf.tableDetails();
-           
-            
-        
-        }catch(SQLException ex){
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null,ex);
-        }
-        }else{
-            System.out.println("The connection not available");
-        }
-        
+        return false;
     }
 }
