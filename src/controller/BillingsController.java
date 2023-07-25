@@ -5,7 +5,6 @@
 package controller;
 
 import daofile.daoBillings;
-import daofile.daoBillings;
 import model.BillingsModel;
 import view.Billings;
 

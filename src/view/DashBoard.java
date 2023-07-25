@@ -31,20 +31,20 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         logOutbtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        staffBtn = new javax.swing.JButton();
-        viewReportsBtn = new javax.swing.JButton();
-        patientsBtn = new javax.swing.JButton();
+        btnStaff = new javax.swing.JButton();
+        btnViewReports = new javax.swing.JButton();
+        btnPatients = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        dogsBtn = new javax.swing.JButton();
-        catsBtn = new javax.swing.JButton();
-        horsesBtn = new javax.swing.JButton();
-        rabbitsBtn = new javax.swing.JButton();
-        birdsBtn = new javax.swing.JButton();
+        btnDogs = new javax.swing.JButton();
+        btnCats = new javax.swing.JButton();
+        btnHorses = new javax.swing.JButton();
+        btnRabbits = new javax.swing.JButton();
+        btnBirds = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        staffBtn1 = new javax.swing.JButton();
+        btnAppointments = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -81,30 +81,30 @@ public class DashBoard extends javax.swing.JFrame {
             .addComponent(logOutbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        staffBtn.setBackground(new java.awt.Color(102, 153, 255));
-        staffBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        staffBtn.setText("Staff");
-        staffBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnStaff.setBackground(new java.awt.Color(102, 153, 255));
+        btnStaff.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnStaff.setText("Staff");
+        btnStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffBtnActionPerformed(evt);
+                btnStaffActionPerformed(evt);
             }
         });
 
-        viewReportsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        viewReportsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        viewReportsBtn.setText("View Reports");
-        viewReportsBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnViewReports.setBackground(new java.awt.Color(102, 153, 255));
+        btnViewReports.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnViewReports.setText("View Reports");
+        btnViewReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewReportsBtnActionPerformed(evt);
+                btnViewReportsActionPerformed(evt);
             }
         });
 
-        patientsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        patientsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        patientsBtn.setText("Patients");
-        patientsBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnPatients.setBackground(new java.awt.Color(102, 153, 255));
+        btnPatients.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnPatients.setText("Patients");
+        btnPatients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientsBtnActionPerformed(evt);
+                btnPatientsActionPerformed(evt);
             }
         });
 
@@ -118,43 +118,48 @@ public class DashBoard extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(200, 200, 200));
 
-        dogsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        dogsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        dogsBtn.setText("DOGS");
-        dogsBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnDogs.setBackground(new java.awt.Color(102, 153, 255));
+        btnDogs.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnDogs.setText("DOGS");
+        btnDogs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dogsBtnActionPerformed(evt);
+                btnDogsActionPerformed(evt);
             }
         });
 
-        catsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        catsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        catsBtn.setText("CATS");
-
-        horsesBtn.setBackground(new java.awt.Color(102, 153, 255));
-        horsesBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        horsesBtn.setText("HORSES");
-        horsesBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnCats.setBackground(new java.awt.Color(102, 153, 255));
+        btnCats.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnCats.setText("CATS");
+        btnCats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horsesBtnActionPerformed(evt);
+                btnCatsActionPerformed(evt);
             }
         });
 
-        rabbitsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        rabbitsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        rabbitsBtn.setText("RABBITS");
-        rabbitsBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnHorses.setBackground(new java.awt.Color(102, 153, 255));
+        btnHorses.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnHorses.setText("HORSES");
+        btnHorses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rabbitsBtnActionPerformed(evt);
+                btnHorsesActionPerformed(evt);
             }
         });
 
-        birdsBtn.setBackground(new java.awt.Color(102, 153, 255));
-        birdsBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        birdsBtn.setText("BIRDS");
-        birdsBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnRabbits.setBackground(new java.awt.Color(102, 153, 255));
+        btnRabbits.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnRabbits.setText("RABBITS");
+        btnRabbits.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birdsBtnActionPerformed(evt);
+                btnRabbitsActionPerformed(evt);
+            }
+        });
+
+        btnBirds.setBackground(new java.awt.Color(102, 153, 255));
+        btnBirds.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnBirds.setText("BIRDS");
+        btnBirds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBirdsActionPerformed(evt);
             }
         });
 
@@ -165,26 +170,26 @@ public class DashBoard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(birdsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rabbitsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                    .addComponent(horsesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(catsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dogsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBirds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRabbits, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(btnHorses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDogs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dogsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDogs, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(catsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCats, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(horsesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHorses, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rabbitsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRabbits, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(birdsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBirds, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -223,12 +228,12 @@ public class DashBoard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        staffBtn1.setBackground(new java.awt.Color(102, 153, 255));
-        staffBtn1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        staffBtn1.setText("Appointments");
-        staffBtn1.addActionListener(new java.awt.event.ActionListener() {
+        btnAppointments.setBackground(new java.awt.Color(102, 153, 255));
+        btnAppointments.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnAppointments.setText("Appointments");
+        btnAppointments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffBtn1ActionPerformed(evt);
+                btnAppointmentsActionPerformed(evt);
             }
         });
 
@@ -242,13 +247,13 @@ public class DashBoard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(staffBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(staffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(viewReportsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnViewReports, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(patientsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -261,10 +266,10 @@ public class DashBoard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(viewReportsBtn)
-                    .addComponent(patientsBtn)
-                    .addComponent(staffBtn)
-                    .addComponent(staffBtn1))
+                    .addComponent(btnViewReports)
+                    .addComponent(btnPatients)
+                    .addComponent(btnStaff)
+                    .addComponent(btnAppointments))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -274,41 +279,70 @@ public class DashBoard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void staffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBtnActionPerformed
+    private void btnStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaffActionPerformed
         // TODO add your handling code here:
         setVisible(false);
         Staff s = new Staff();
         s.setTitle("Staff");
         s.setVisible(true);
-    }//GEN-LAST:event_staffBtnActionPerformed
+    }//GEN-LAST:event_btnStaffActionPerformed
 
-    private void viewReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewReportsBtnActionPerformed
+    private void btnViewReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewReportsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_viewReportsBtnActionPerformed
+        setVisible(false);
+        View_Report s = new View_Report();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnViewReportsActionPerformed
 
-    private void patientsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientsBtnActionPerformed
+    private void btnPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_patientsBtnActionPerformed
+        setVisible(false);
+        Patients s = new Patients();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnPatientsActionPerformed
 
-    private void horsesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horsesBtnActionPerformed
+    private void btnHorsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHorsesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_horsesBtnActionPerformed
+        setVisible(false);
+        DepartmentHorses s = new DepartmentHorses();
+        s.setTitle("Staff");
+        s.setVisible(true);
+        
+    }//GEN-LAST:event_btnHorsesActionPerformed
 
-    private void rabbitsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rabbitsBtnActionPerformed
+    private void btnRabbitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRabbitsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rabbitsBtnActionPerformed
+        setVisible(false);
+        DepartmentRabbits s = new DepartmentRabbits();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnRabbitsActionPerformed
 
-    private void birdsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birdsBtnActionPerformed
+    private void btnBirdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBirdsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_birdsBtnActionPerformed
+        setVisible(false);
+        DepartmentBirds s = new DepartmentBirds();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnBirdsActionPerformed
 
-    private void dogsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dogsBtnActionPerformed
+    private void btnDogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDogsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dogsBtnActionPerformed
+        setVisible(false);
+        DepartmentDogs s = new DepartmentDogs();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnDogsActionPerformed
 
-    private void staffBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBtn1ActionPerformed
+    private void btnAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_staffBtn1ActionPerformed
+        setVisible(false);
+        Appointment s = new Appointment();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnAppointmentsActionPerformed
 
     private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
         // TODO add your handling code here:
@@ -316,6 +350,14 @@ public class DashBoard extends javax.swing.JFrame {
         Login l= new Login();
         l.setVisible(true);
     }//GEN-LAST:event_logOutbtnActionPerformed
+
+    private void btnCatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatsActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        DepartmentCats s = new DepartmentCats();
+        s.setTitle("Staff");
+        s.setVisible(true);
+    }//GEN-LAST:event_btnCatsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,10 +395,15 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton birdsBtn;
-    private javax.swing.JButton catsBtn;
-    private javax.swing.JButton dogsBtn;
-    private javax.swing.JButton horsesBtn;
+    private javax.swing.JButton btnAppointments;
+    private javax.swing.JButton btnBirds;
+    private javax.swing.JButton btnCats;
+    private javax.swing.JButton btnDogs;
+    private javax.swing.JButton btnHorses;
+    private javax.swing.JButton btnPatients;
+    private javax.swing.JButton btnRabbits;
+    private javax.swing.JButton btnStaff;
+    private javax.swing.JButton btnViewReports;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,10 +413,5 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton logOutbtn;
-    private javax.swing.JButton patientsBtn;
-    private javax.swing.JButton rabbitsBtn;
-    private javax.swing.JButton staffBtn;
-    private javax.swing.JButton staffBtn1;
-    private javax.swing.JButton viewReportsBtn;
     // End of variables declaration//GEN-END:variables
 }

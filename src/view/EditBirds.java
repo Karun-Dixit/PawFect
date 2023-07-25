@@ -3,11 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import database.DbConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
+import controller.EditBirdsController;
 import javax.swing.JOptionPane;
-import java.sql.Statement;
+import model.EditBirdsModel;
+import static model.EditBirdsModel.*;
 
 /**
  *
@@ -42,9 +41,9 @@ public class EditBirds extends javax.swing.JFrame {
         txtQualification = new javax.swing.JTextField();
         txtType = new javax.swing.JTextField();
         txtTime = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        dID = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,12 +81,12 @@ public class EditBirds extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jLabel5.setText("Time");
 
-        jButton3.setBackground(new java.awt.Color(80, 131, 233));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jButton3.setText("DELETE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(80, 131, 233));
+        btnDelete.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -123,13 +122,13 @@ public class EditBirds extends javax.swing.JFrame {
                     .addComponent(txtType)
                     .addComponent(txtQualification)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(dID, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bthUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnDelete)
                 .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,7 +140,7 @@ public class EditBirds extends javax.swing.JFrame {
                     .addComponent(btnSearch)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +160,7 @@ public class EditBirds extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bthUpdate)
-                            .addComponent(jButton3)))
+                            .addComponent(btnDelete)))
                     .addComponent(txtQualification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -183,19 +182,13 @@ public class EditBirds extends javax.swing.JFrame {
 
     private void bthUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthUpdateActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        String name = txtName.getText();
-        String field= txtQualification.getText();
-        String ph=txtType.getText();
-        String exp = txtTime.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            st.executeUpdate("update Birds set Name='"+name+"',Qualification='"+field+"',Type='"+ph+"',Timing='"+exp+"'where ID='"+dId+"'");
-            JOptionPane.showMessageDialog(null, "Successfully Updated!");
-            setVisible(false);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        EditBirdsController econtrol = new EditBirdsController(getuser(),this);
+        if(econtrol.uptBirds()){
+        dID.setText("");
+        txtName.setText("");
+        txtQualification.setText("");
+        txtType.setText("");
+        txtTime.setText("");
         }
     }//GEN-LAST:event_bthUpdateActionPerformed
 
@@ -204,41 +197,29 @@ public class EditBirds extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
         int s=JOptionPane.showConfirmDialog(null,"Are sure to delete?","Select",JOptionPane.YES_NO_OPTION);
         if(s==0){
-            try{
-                Connection dbconn = (Connection) DbConnection.connectDB();
-                Statement st=(Statement)dbconn.createStatement();
-                st.executeUpdate("delete from Birds where ID='"+dId+"'");
-                JOptionPane.showMessageDialog(null,"Successfully Deleted!");
-                setVisible(false);
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,e);
-            }
+            EditBirdsController econtrol = new EditBirdsController(getuser(),this);
+            if(econtrol.delBirds()){
+            dID.setText("");
+            txtName.setText("");
+            txtQualification.setText("");
+            txtType.setText("");
+            txtTime.setText("");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String dId=jTextField6.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            ResultSet rs = st.executeQuery("select * from Birds where ID='"+dId+"'");
-            if(rs.next()){
-                txtName.setText(rs.getString(2));
-                txtQualification.setText(rs.getString(3));
-                txtType.setText(rs.getString(4));
-                txtTime.setText(rs.getString(5));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+        EditBirdsController econtrol = new EditBirdsController(getuser(),this);
+        if(econtrol.searchBirds()){
+        txtName.setText(getNameB());
+        txtQualification.setText(getQualification());
+        txtType.setText(getType1());
+        txtTime.setText(getTiming());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -276,19 +257,30 @@ public class EditBirds extends javax.swing.JFrame {
             }
         });
     }
+    
+    public EditBirdsModel getuser(){
+        EditBirdsModel Birdsss= new EditBirdsModel(
+            dID.getText(),
+            txtName.getText(),
+            txtQualification.getText(),
+            txtType.getText(),
+            txtTime.getText()
+        );
+        return Birdsss;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bthUpdate;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JTextField dID;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtQualification;
     private javax.swing.JTextField txtTime;

@@ -5,13 +5,15 @@
  */
 package view;
 
+import controller.View_ReportController;
 import database.DbConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.View_Report1Model;
+import static model.View_Report1Model.*;
 import model.View_ReportModel;
 
 /**
@@ -29,7 +31,7 @@ public class View_Report extends javax.swing.JFrame {
     }
     
 public View_ReportModel getUser(){
- modell= new View_ReportModel(txt_search.getText());
+ modell= new View_ReportModel(dID.getText());
  return modell;
 }
     public void setRecordsTable(){
@@ -130,11 +132,12 @@ public View_ReportModel getUser(){
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_report = new javax.swing.JTable();
+        btn_Refresh = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         lbl_report = new javax.swing.JLabel();
         btn_print = new javax.swing.JButton();
         btn_search = new javax.swing.JButton();
-        txt_search = new javax.swing.JTextField();
+        dID = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
@@ -146,6 +149,7 @@ public View_ReportModel getUser(){
 
         btn_home.setBackground(new java.awt.Color(241, 205, 114));
         btn_home.setForeground(new java.awt.Color(241, 205, 114));
+        btn_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/home1.png"))); // NOI18N
         btn_home.setBorderPainted(false);
         btn_home.setContentAreaFilled(false);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
@@ -163,10 +167,10 @@ public View_ReportModel getUser(){
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_home)
-                .addGap(279, 279, 279)
+                .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(313, 313, 313)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,9 +289,9 @@ public View_ReportModel getUser(){
                     .addComponent(jLabel11)
                     .addComponent(txt_contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_test, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_test, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,6 +328,15 @@ public View_ReportModel getUser(){
         });
         jScrollPane1.setViewportView(table_report);
 
+        btn_Refresh.setBackground(new java.awt.Color(114, 164, 241));
+        btn_Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/refreshV.png"))); // NOI18N
+        btn_Refresh.setContentAreaFilled(false);
+        btn_Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -335,18 +348,21 @@ public View_ReportModel getUser(){
                         .addComponent(jLabel4)
                         .addGap(83, 83, 83)
                         .addComponent(jLabel12)
-                        .addGap(159, 159, 159))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(68, 68, 68)
+                        .addComponent(btn_Refresh))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel12))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel12)))
+                    .addComponent(btn_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -397,10 +413,10 @@ public View_ReportModel getUser(){
             }
         });
 
-        txt_search.setToolTipText("");
-        txt_search.addActionListener(new java.awt.event.ActionListener() {
+        dID.setToolTipText("");
+        dID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_searchActionPerformed(evt);
+                dIDActionPerformed(evt);
             }
         });
 
@@ -436,7 +452,7 @@ public View_ReportModel getUser(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -452,7 +468,7 @@ public View_ReportModel getUser(){
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_print))
@@ -504,13 +520,13 @@ public View_ReportModel getUser(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
- DashBoard dashboard=new DashBoard();
- dashboard.show();
-this.dispose();
+    DashBoard dashboard=new DashBoard();
+    dashboard.show();
+   this.dispose();
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
-    String sec=txt_search.getText();
+    String sec=dID.getText();
         if (sec.equals("")){
                      JOptionPane.showMessageDialog(null, "No ID number selected");
 
@@ -530,70 +546,37 @@ this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_txt_nameActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        int ID=Integer.parseInt(txt_search.getText());
-        String Name=(txt_name.getText());
-        String age = txt_age.getText();
-        String dob = txt_dob.getText();
-        String breed = txt_breed.getText();
-        String contact = txt_contact.getText();
-        String test = txt_test.getText();
-        String result = txt_result.getText();
-        try{
-             Connection dbconn = (Connection) DbConnection.connectDB();
-             Statement st=(Statement)dbconn.createStatement();
-             st.executeUpdate("update patients set PatientName='"+Name+"',Age='"+age+"',DOB='"+dob+"',Field='"+breed+"',Contact='"+contact+"',Tests='"+test+"',Report='"+result+"'where ID='"+ID+"'");
-             JOptionPane.showMessageDialog(null, "Successfully Updated!");
-              new View_Report().setVisible(false);
-            dispose();
-            new View_Report().setVisible(true);
-             
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        View_ReportController econtrol = new View_ReportController(getuser(),this);
+        if(econtrol.uptView_Report()){
+            dID.setText("");
         }
-        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void txt_dobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dobActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_dobActionPerformed
 
-    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
+    private void dIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_searchActionPerformed
+    }//GEN-LAST:event_dIDActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
                     
-               model=(DefaultTableModel)table_report.getModel();
-               model.setRowCount(0);
-        String dId=txt_search.getText();
-        try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-            ResultSet rs = st.executeQuery("select * from patients where PatientID='"+dId+"'");
-            
-            if(rs.next()){
-                txt_name.setText(rs.getString(2));
-                txt_age.setText(rs.getString(3));
-                txt_dob.setText(rs.getString(4));
-                txt_breed.setText(rs.getString(5));
-                txt_contact.setText(rs.getString(8));
-                String tests=rs.getString("Tests");
-                String report=rs.getString("Report");
-                txt_test.setText(rs.getString(10));
-                txt_result.setText(rs.getString(11));
-                Object[]obj={tests,report};
-
-               model.addRow(obj);
+//            model=(DefaultTableModel)table_report.getModel();
+//            model.setRowCount(0);
+            View_ReportController econtrol = new View_ReportController(getuser(),this);
+            if(econtrol.searchView_Report()){
+            txt_name.setText(getNameV());
+            txt_age.setText(getAgeV());
+            txt_dob.setText(getDob());
+            txt_breed.setText(getBreed());
+            txt_contact.setText(getContact());
+            txt_test.setText(getTests());
+            txt_result.setText(getReport());
+            }
                
                
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
             
-        }        // TODO add your handling code here:
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void table_reportAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_table_reportAncestorAdded
@@ -601,39 +584,23 @@ this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_table_reportAncestorAdded
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
-       try{
-            Connection dbconn = (Connection) DbConnection.connectDB();
-            Statement st=(Statement)dbconn.createStatement();
-        String IID= txt_search.getText();
-        ResultSet rs = st.executeQuery("select * from patients where PatientID ='"+IID+"'");
-                 if(IID.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Please enter valid ID!","ERROR",JOptionPane.ERROR_MESSAGE);
-              }else{
-            if(rs.next()){
-                boolean b = st.execute("UPDATE patients SET Tests = null , Report=null where id='"+IID+"'"); 
-            if(!b){
-            JOptionPane.showMessageDialog(this, "Deleted");
-            new View_Report().setVisible(false);
-            dispose();
-            new View_Report().setVisible(true);
-
-            }else{
-            JOptionPane.showMessageDialog(this,"ERROR! Try Again");
-            }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Such ID doestn't exist!");
-            }
-              }
-            //clear();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+    int s=JOptionPane.showConfirmDialog(null,"Are sure to delete Tests & Result?","Select",JOptionPane.YES_NO_OPTION);
+        if(s==0){
+            View_ReportController econtrol = new View_ReportController(getuser(),this);
+            if(econtrol.delView_Report()){
+            dID.setText("");
+            txt_test.setText("");
+            txt_result.setText("");
+        }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btn_printMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_printMouseClicked
     }//GEN-LAST:event_btn_printMouseClicked
+
+    private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_RefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -669,13 +636,29 @@ this.dispose();// TODO add your handling code here:
             }
         });
     }
+    
+    public View_Report1Model getuser(){
+        View_Report1Model Reportss= new View_Report1Model(
+            dID.getText(),
+            txt_name.getText(),
+            txt_age.getText(),
+            txt_dob.getText(),
+            txt_breed.getText(),
+            txt_contact.getText(),
+            txt_test.getText(),
+            txt_result.getText()
+        );
+        return Reportss;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btn_Refresh;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_print;
     private javax.swing.JButton btn_search;
+    private javax.swing.JTextField dID;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -702,7 +685,6 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JTextField txt_dob;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_result;
-    private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_test;
     // End of variables declaration//GEN-END:variables
 

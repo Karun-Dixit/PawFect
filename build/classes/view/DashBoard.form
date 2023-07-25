@@ -33,13 +33,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Component id="staffBtn1" min="-2" pref="193" max="-2" attributes="0"/>
+                      <Component id="btnAppointments" min="-2" pref="193" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="staffBtn" min="-2" pref="193" max="-2" attributes="0"/>
+                      <Component id="btnStaff" min="-2" pref="193" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="viewReportsBtn" min="-2" pref="191" max="-2" attributes="0"/>
+                      <Component id="btnViewReports" min="-2" pref="191" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="patientsBtn" min="-2" pref="189" max="-2" attributes="0"/>
+                      <Component id="btnPatients" min="-2" pref="189" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
@@ -56,10 +56,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="viewReportsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="patientsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="staffBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="staffBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnViewReports" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPatients" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnStaff" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAppointments" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
@@ -122,7 +122,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel2">
     </Component>
-    <Component class="javax.swing.JButton" name="staffBtn">
+    <Component class="javax.swing.JButton" name="btnStaff">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -133,10 +133,10 @@
         <Property name="text" type="java.lang.String" value="Staff"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staffBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStaffActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="viewReportsBtn">
+    <Component class="javax.swing.JButton" name="btnViewReports">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -147,10 +147,10 @@
         <Property name="text" type="java.lang.String" value="View Reports"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewReportsBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewReportsActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="patientsBtn">
+    <Component class="javax.swing.JButton" name="btnPatients">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -161,7 +161,7 @@
         <Property name="text" type="java.lang.String" value="Patients"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientsBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPatientsActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -242,11 +242,11 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="birdsBtn" max="32767" attributes="0"/>
-                          <Component id="rabbitsBtn" pref="276" max="32767" attributes="0"/>
-                          <Component id="horsesBtn" max="32767" attributes="0"/>
-                          <Component id="catsBtn" max="32767" attributes="0"/>
-                          <Component id="dogsBtn" max="32767" attributes="0"/>
+                          <Component id="btnBirds" max="32767" attributes="0"/>
+                          <Component id="btnRabbits" pref="276" max="32767" attributes="0"/>
+                          <Component id="btnHorses" max="32767" attributes="0"/>
+                          <Component id="btnCats" max="32767" attributes="0"/>
+                          <Component id="btnDogs" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -256,22 +256,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="dogsBtn" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnDogs" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="catsBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnCats" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="horsesBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="btnHorses" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rabbitsBtn" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnRabbits" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="birdsBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnBirds" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="dogsBtn">
+            <Component class="javax.swing.JButton" name="btnDogs">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -282,10 +282,10 @@
                 <Property name="text" type="java.lang.String" value="DOGS"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dogsBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDogsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="catsBtn">
+            <Component class="javax.swing.JButton" name="btnCats">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -295,8 +295,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="CATS"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCatsActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="horsesBtn">
+            <Component class="javax.swing.JButton" name="btnHorses">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -307,10 +310,10 @@
                 <Property name="text" type="java.lang.String" value="HORSES"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horsesBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHorsesActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="rabbitsBtn">
+            <Component class="javax.swing.JButton" name="btnRabbits">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -321,10 +324,10 @@
                 <Property name="text" type="java.lang.String" value="RABBITS"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rabbitsBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRabbitsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="birdsBtn">
+            <Component class="javax.swing.JButton" name="btnBirds">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -335,7 +338,7 @@
                 <Property name="text" type="java.lang.String" value="BIRDS"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birdsBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBirdsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -349,7 +352,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="staffBtn1">
+    <Component class="javax.swing.JButton" name="btnAppointments">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -360,7 +363,7 @@
         <Property name="text" type="java.lang.String" value="Appointments"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staffBtn1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAppointmentsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
