@@ -314,14 +314,39 @@ public class Medications extends javax.swing.JFrame {
     }//GEN-LAST:event_tocoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int cost1 = Integer.valueOf(co1.getText());
-        int cost2 = Integer.valueOf(co2.getText());
-        int cost3 = Integer.valueOf(co3.getText());
-        
-        int total = cost1 + cost2+ cost3;
-        
+        try {
+        int cost1 = 0;
+        int cost2 = 0;
+        int cost3 = 0;
+
+        // Parse the input text to integers if they are not null or empty.
+        String text1 = co1.getText();
+        if (text1 != null && !text1.isEmpty()) {
+            cost1 = Integer.parseInt(text1);
+        }
+
+        String text2 = co2.getText();
+        if (text2 != null && !text2.isEmpty()) {
+            cost2 = Integer.parseInt(text2);
+        }
+
+        String text3 = co3.getText();
+        if (text3 != null && !text3.isEmpty()) {
+            cost3 = Integer.parseInt(text3);
+        }
+
+        // Calculate the total cost.
+        int total = cost1 + cost2 + cost3;
+
+        // Set the total cost in the 'toco' field.
         toco.setText(String.valueOf(total));
-        
+    } catch (NumberFormatException e) {
+        // Handle any invalid input (e.g., non-integer values).
+        // You can display an error message or handle it as appropriate for your application.
+        // For example:
+        toco.setText("Invalid input");
+    }
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 

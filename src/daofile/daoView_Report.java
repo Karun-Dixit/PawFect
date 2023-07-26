@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.View_Report1Model;
 import static model.View_Report1Model.*;
 import model.View_ReportModel;
+import model.View_ReportTableModel;
 
 /**
  *
@@ -22,6 +24,10 @@ public class daoView_Report {
 
     public daoView_Report(View_Report1Model smodel) {
         this.smodel=smodel;
+    }
+    private View_ReportTableModel model;
+    public daoView_Report(View_ReportTableModel model) {
+        this.model=model;
     }
     
     public boolean searchView_Report(){
@@ -59,7 +65,7 @@ public class daoView_Report {
         try{
                 Connection dbconn = (Connection) DbConnection.connectDB();
                 Statement st=(Statement)dbconn.createStatement();
-                st.executeUpdate("UPDATE patients SET Tests = null , Report=null where id='"+getId()+"'");
+                st.executeUpdate("UPDATE patients SET Tests = null , Report=null where PatientID='"+getId()+"'");
                 JOptionPane.showMessageDialog(null,"Successfully Deleted!");
                 return true;
             }catch(Exception e){
@@ -67,5 +73,23 @@ public class daoView_Report {
             }
         return false;
     }
+    
+    public boolean allReports(){
+        DefaultTableModel a=model.getTableName();
+        a.setRowCount(0);
+        try{
+            Connection connect = (Connection) DbConnection.connectDB();
+            Statement statement= connect.createStatement();
+            ResultSet result= statement.executeQuery("select * from patients where PatientID='"+getId()+"'");
+            while(result.next()){
+                a.addRow(new Object[]{result.getString(10),result.getString(11)});
+            }
+            return true;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return false;
+    } 
     
 }

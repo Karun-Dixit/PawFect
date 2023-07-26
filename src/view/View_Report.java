@@ -6,15 +6,19 @@
 package view;
 
 import controller.View_ReportController;
+import controller.View_ReportTableController;
 import database.DbConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.View_Report1Model;
 import static model.View_Report1Model.*;
 import model.View_ReportModel;
+import model.View_ReportTableModel;
 
 /**
  *
@@ -561,11 +565,21 @@ this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_dIDActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-                    
-//            model=(DefaultTableModel)table_report.getModel();
-//            model.setRowCount(0);
-            View_ReportController econtrol = new View_ReportController(getuser(),this);
-            if(econtrol.searchView_Report()){
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+    // First code block
+    Runnable r1 = () -> {
+        View_ReportTableController rcontrol = new View_ReportTableController(getValueTable(), this);
+        if (!rcontrol.allReports()) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+    };
+
+    // Second code block
+    Runnable r2 = () -> {
+        View_ReportController econtrol = new View_ReportController(getuser(), this);
+        if (econtrol.searchView_Report()) {
             txt_name.setText(getNameV());
             txt_age.setText(getAgeV());
             txt_dob.setText(getDob());
@@ -573,7 +587,15 @@ this.dispose();// TODO add your handling code here:
             txt_contact.setText(getContact());
             txt_test.setText(getTests());
             txt_result.setText(getReport());
-            }
+        }
+    };
+
+    // Execute both blocks simultaneously
+    executor.execute(r1);
+    executor.execute(r2);
+
+    // Shutdown the executor once both tasks are completed
+    executor.shutdown();
                
                
             
@@ -600,6 +622,10 @@ this.dispose();// TODO add your handling code here:
 
     private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
         // TODO add your handling code here:
+        View_ReportTableController rcontrol=new View_ReportTableController(getValueTable(),this);
+        if(!rcontrol.allReports()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }//GEN-LAST:event_btn_RefreshActionPerformed
 
     /**
@@ -650,6 +676,12 @@ this.dispose();// TODO add your handling code here:
         );
         return Reportss;
     }
+    
+    public View_ReportTableModel getValueTable(){
+        DefaultTableModel tableName=(DefaultTableModel) table_report.getModel();
+        View_ReportTableModel obj=new View_ReportTableModel(tableName);
+        return obj;
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;

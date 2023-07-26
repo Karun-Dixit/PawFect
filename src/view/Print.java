@@ -155,7 +155,7 @@ public class Print extends javax.swing.JFrame {
             String sql="SELECT * FROM patients where PatientID='"+getId()+"'";
                      java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
                     ResultSet rs = stmt.executeQuery();
-                    rs.next();
+                    if (rs.next()) {
 
                     txtprint.setText(txtprint.getText()+"\t                   Report"+"\n");
                       txtprint.setText(txtprint.getText()+"\t                 PawFect\n");
@@ -175,7 +175,11 @@ public class Print extends javax.swing.JFrame {
                     txtprint.setText(txtprint.getText()+"Test::   "+rs.getString("Tests")+"\n");
                     txtprint.setText(txtprint.getText()+"\n");
                     txtprint.setText(txtprint.getText()+"Result::   "+rs.getString("Report")+"\n");
-     
+                    rs.close();
+
+                    }else {
+                        System.out.println("No data found in the result set.");
+                    }
         }
         catch(Exception e){
             e.printStackTrace();

@@ -1,4 +1,5 @@
 package view;
+import controller.AppointmentController;
 import database.DbConnection;
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import model.AppointmentModel;
 
 
 /*
@@ -22,7 +24,7 @@ import java.sql.Statement;
 public class Appointment extends javax.swing.JFrame {
 
     /**
-     * Creates new form Patients
+     * Creates new form Appointment
      */
     public void close(){
     WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
@@ -30,8 +32,17 @@ public class Appointment extends javax.swing.JFrame {
     }
     public Appointment() {
         initComponents();
-        tableDetails();
+        AppointmentController rcontrol=new AppointmentController(getValueTable(),this);
+        if(!rcontrol.allAppointment()){
+            JOptionPane.showMessageDialog(null, "Error");
         }
+    }
+        public AppointmentModel getValueTable(){
+            DefaultTableModel tableName=(DefaultTableModel) AppointmentTable.getModel();
+            AppointmentModel obj=new AppointmentModel(tableName);
+            return obj;
+            }
+        
         
 
     /**
@@ -66,6 +77,7 @@ public class Appointment extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 220, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Foto/home1.png"))); // NOI18N
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -77,18 +89,19 @@ public class Appointment extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(305, 305, 305)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(293, 293, 293)
                 .addComponent(jLabel1)
                 .addContainerGap(358, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addGap(24, 24, 24))
         );
 
@@ -228,11 +241,10 @@ public class Appointment extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-//        BirdsController rcontrol=new BirdsController(getValueTable(),this);
-//        if(!rcontrol.allBirds()){
-//            JOptionPane.showMessageDialog(null, "Error");
-//        }
-    tableDetails();
+    AppointmentController rcontrol=new AppointmentController(getValueTable(),this);
+        if(!rcontrol.allAppointment()){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -281,26 +293,7 @@ public class Appointment extends javax.swing.JFrame {
         });
     }
     
-    public void tableDetails()
-    {
-        DefaultTableModel dtm=(DefaultTableModel) AppointmentTable.getModel();
-        dtm.setRowCount(0);
-        
-        try
-        {
-            Connection con=DbConnection.connectDB();
-                    Statement st=con.createStatement();
-                    ResultSet rs=st.executeQuery("select * from appointment");
-                    while (rs.next())
-                    {
-                        dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-                    }
-        }
-        catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(rootPane, e.getMessage());
-                }
-    }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
