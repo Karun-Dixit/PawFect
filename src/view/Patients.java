@@ -265,7 +265,6 @@ public class Patients extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         setVisible(true);
-        close();
         AddPatients s = new AddPatients();
         s.setTitle("Add");
         s.setVisible(true);
@@ -274,7 +273,6 @@ public class Patients extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         setVisible(true);
-        close();
         EditPatients s = new EditPatients();
         s.setTitle("update");
         s.setVisible(true);

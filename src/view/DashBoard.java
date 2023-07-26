@@ -291,7 +291,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         View_Report s = new View_Report();
-        s.setTitle("Staff");
+        s.setTitle("View Report");
         s.setVisible(true);
     }//GEN-LAST:event_btnViewReportsActionPerformed
 
@@ -299,7 +299,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         Patients s = new Patients();
-        s.setTitle("Staff");
+        s.setTitle("Patients");
         s.setVisible(true);
     }//GEN-LAST:event_btnPatientsActionPerformed
 
@@ -307,7 +307,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         DepartmentHorses s = new DepartmentHorses();
-        s.setTitle("Staff");
+        s.setTitle("Horses");
         s.setVisible(true);
         
     }//GEN-LAST:event_btnHorsesActionPerformed
@@ -316,7 +316,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         DepartmentRabbits s = new DepartmentRabbits();
-        s.setTitle("Staff");
+        s.setTitle("Rabbits");
         s.setVisible(true);
     }//GEN-LAST:event_btnRabbitsActionPerformed
 
@@ -324,7 +324,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         DepartmentBirds s = new DepartmentBirds();
-        s.setTitle("Staff");
+        s.setTitle("Birds");
         s.setVisible(true);
     }//GEN-LAST:event_btnBirdsActionPerformed
 
@@ -332,7 +332,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         DepartmentDogs s = new DepartmentDogs();
-        s.setTitle("Staff");
+        s.setTitle("Dogs");
         s.setVisible(true);
     }//GEN-LAST:event_btnDogsActionPerformed
 
@@ -340,7 +340,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         Appointment s = new Appointment();
-        s.setTitle("Staff");
+        s.setTitle("Appointments");
         s.setVisible(true);
     }//GEN-LAST:event_btnAppointmentsActionPerformed
 
@@ -355,7 +355,7 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         DepartmentCats s = new DepartmentCats();
-        s.setTitle("Staff");
+        s.setTitle("Cats");
         s.setVisible(true);
     }//GEN-LAST:event_btnCatsActionPerformed
 
